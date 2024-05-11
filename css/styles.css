@@ -133,3 +133,18 @@ html {
   padding-top: 50px;
 }
 
+@media (max-width: 768px) {
+  /* CSS rules for small screens and smaller */
+  .skill-card {
+    width: 80%;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 576px) {
+  /* CSS rules for small screens and smaller */
+  .skill-card {
+    width: 100%;
+    margin: 0 auto;
+  }
+}
