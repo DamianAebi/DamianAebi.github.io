@@ -12,14 +12,21 @@
   font-style: normal;
 }
 
-.roboto-bold, h1{
+.roboto-bold, h1, h5{
   font-family: "Roboto", sans-serif;
   font-weight: 700 !important;
   font-style: normal;
 }
 
+.roboto-black,  h5{
+  font-family: "Roboto", sans-serif;
+  font-weight: 900 !important;
+  font-style: normal;
+}
+
 h1 {
   color: #e84a1a !important;
+  margin-top: 20px !important;
 }
 
 h2 {
@@ -46,5 +53,75 @@ html {
   max-width: 300px;
   display: block;
   margin: 0 auto;
+}
+
+.skill-card {
+  border-radius: 5%;
+  background-color: #e6eef9;
+  width: 250px;
+  height: 400px;
+}
+
+.skill-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.skill-card-image {
+  width: 100%;
+  height: 200px;
+  border-radius: 5% 5% 0 0;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.skill-card-body {
+  height: 200px;
+  width: 100%;
+  padding: 10px;
+}
+
+.skill-card-text {
+  margin-bottom: 5px;
+}
+
+.skill-card-link {
+  text-decoration: none;
+  color: #3d4862;
+}
+
+#html-card-image {
+  background-image: url("../img/logo_html.png");
+}
+
+#js-card-image {
+  background-image: url("../img/logo_javascript.png");
+}
+
+#python-card-image {
+  background-image: url("../img/logo_python.png");
+}
+
+#sql-card-image {
+  background-image: url("../img/logo_sql.png");
+}
+
+#react-card-image {
+  background-image: url("../img/logo_react.png");
+}
+
+#data-card-image {
+  background-image: url("../img/logo_postgreSQL.png");
+}
+
+#django-card-image {
+  background-image: url("../img/logo_django.png");
+}
+
+#git-card-image {
+  background-image: url("../img/logo_git.png");
 }
 
