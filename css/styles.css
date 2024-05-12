@@ -69,7 +69,7 @@ html {
 
 .skill-card:hover {
   transform: scale(1.02);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 2px 1px 10px rgba(0, 0, 0, 0.1);
   transition: 0.3s;
   cursor: pointer;
 }
@@ -142,9 +142,8 @@ html {
 }
 
 .carousel-card-body {
-  height: 400px;
+  min-height: 300px;
 }
-
 
 #kontakt {
   width: 100%;
