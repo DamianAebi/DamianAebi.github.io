@@ -1,0 +1,681 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Frameworks</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="b2fb6290-57f1-4127-8626-789f41a030f8" class="page sans"><header><h1 class="page-title">Frameworks</h1><p class="page-description"></p></header><div class="page-body"><ul id="b524db8e-057e-4f1d-b747-33b336c99fa9" class="bulleted-list"><li style="list-style-type:disc">Frameworks sind eine Sammlung von Tools</li></ul><ul id="a705c631-7f2a-4989-bd22-1b86238e6529" class="bulleted-list"><li style="list-style-type:disc">Sie vereinfachen die Arbeit, also man kann mit weniger Arbeit ein Resultat erreichen</li></ul><ul id="1fde150e-1b60-42c0-9011-7b4436dc7cd2" class="bulleted-list"><li style="list-style-type:disc">Man kann effizienter arbeiten</li></ul><ul id="428e8621-c6cb-4894-91f0-20a580c0c3b6" class="bulleted-list"><li style="list-style-type:disc">Es gibt ausserdem Konsistenz im Code</li></ul><ul id="e2132d95-ca6d-43ed-901c-7795d905a69b" class="bulleted-list"><li style="list-style-type:disc">Es ist kompatibel mit Browsern</li></ul><ul id="a46f2406-81e9-478b-8716-e8628e5dc432" class="bulleted-list"><li style="list-style-type:disc">Ausserdem sind die Elemente schon “getested”, man wird also allgemein in weniger Probleme stossen</li></ul><h3 id="7db2077c-8d02-43d1-a5e8-f31282517267" class="">CSS Frameworks</h3><ul id="9b8c5afe-90a6-48e9-858d-9cb10a876716" class="bulleted-list"><li style="list-style-type:disc">Pure CSS<ul id="78a32c69-77aa-4473-b1a0-5ac679714552" class="bulleted-list"><li style="list-style-type:circle">sehr minimal</li></ul></li></ul><ul id="4bc2bea6-f8e1-499a-aaf7-6ef19f73836f" class="bulleted-list"><li style="list-style-type:disc">Tailwind CSS<ul id="69a19752-52a7-4d45-b16f-67e159b7294c" class="bulleted-list"><li style="list-style-type:circle">grosse Auswahl an Komponenten</li></ul></li></ul><ul id="b9b08fa8-7e31-44c5-9e72-a710ac950415" class="bulleted-list"><li style="list-style-type:disc">Bootstrap<ul id="adf041a3-8a27-472a-99fb-4213b5b4a7ef" class="bulleted-list"><li style="list-style-type:circle">Eines der ersten responsive-Frameworks</li></ul><ul id="84a1a300-f5f6-4c7d-92a8-7df16bc735e1" class="bulleted-list"><li style="list-style-type:circle">arbeited mit Grid</li></ul><hr id="975df96f-c234-4c57-85d9-39e5589913eb"/></li></ul><p id="1c30a937-c08b-4bed-a8c2-38f17976b485" class="">
+</p><p id="460cd557-c9b5-4857-800a-a129389f8654" class=""><strong>Auftrag Präsentation (bis 11 Uhr Zeit):</strong> </p><ul id="9ec16953-0ad3-451b-86db-32f3c1b51f5d" class="bulleted-list"><li style="list-style-type:disc">Szenario: Kunde will Framework, welches effizient und anhaltend ist</li></ul><ul id="abffaa2e-a427-4ed7-b7b5-bf0c8f38d8de" class="bulleted-list"><li style="list-style-type:disc">Gewähltes Framework: <mark class="highlight-yellow_background">Bootstrap</mark></li></ul><p id="389346aa-19e2-4e4f-bf8a-95385c13b051" class="">
+</p><ul id="090728e7-1820-4e4e-9f40-46d5b459a1cf" class="bulleted-list"><li style="list-style-type:disc">Warum sollte dieses Framework verwendet werden? (Unique selling point)<ul id="be46ff62-2d40-41c4-9201-cd8272a2d3ac" class="bulleted-list"><li style="list-style-type:circle"><strong>Schnelle Entwicklung</strong>: Bootstrap bietet eine Vielzahl vorgefertigter HTML- und CSS-Komponenten, die es Entwicklern ermöglichen, schnell und effizient Webseiten zu erstellen. Dies führt zu einer beschleunigten Entwicklungszeit.</li></ul><ul id="742105e7-115b-4808-b70c-bbd983fc87ea" class="bulleted-list"><li style="list-style-type:circle"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Mobile- und Browser-Kompatibilität: </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>Bootstrap ist von Grund auf für responsives Webdesign konzipiert. Mit dem Grid-System und den responsiven Klassen können Entwickler problemlos Websites erstellen, die auf verschiedenen Bildschirmgrößen und -geräten gut aussehen.<ul id="e85b43f8-1ea3-4c62-8fba-9ef5a3e43342" class="bulleted-list"><li style="list-style-type:square">Bootstrap wurde getestet und ist in den meisten gängigen Webbrowsern stabil. Dies erleichtert die Sicherstellung einer konsistenten Benutzererfahrung über verschiedene Plattformen hinweg.</li></ul></li></ul><ul id="818e807f-0bdb-43b8-acc0-155d70afd783" class="bulleted-list"><li style="list-style-type:circle"><strong>Anpassbarkeit</strong>: Obwohl Bootstrap vorgefertigte Stile und Komponenten bietet, ist es auch sehr anpassbar. Entwickler können das Framework erweitern und eigene Stile und Komponenten hinzufügen, um ihren speziellen Anforderungen gerecht zu werden.</li></ul></li></ul><ul id="4c13b5e8-bab5-436f-a3e8-f9e53f683fdc" class="bulleted-list"><li style="list-style-type:disc">Für welche Use-Cases ist es besonders geeignet?<ul id="e27c963e-7818-405e-95cd-2955774b79bc" class="bulleted-list"><li style="list-style-type:circle"><strong>Start-ups und kleine Unternehmen</strong>: Bootstrap ist eine kostengünstige Option für Start-ups und kleine Unternehmen, die keine umfangreichen Ressourcen für die Frontend-Entwicklung haben. Es ermöglicht die Erstellung ansprechender Websites mit begrenztem Aufwand.</li></ul><ul id="96b75fd0-a115-4f67-b112-2d7fcf97b378" class="bulleted-list"><li style="list-style-type:circle">Bei komplexen, stark maßgeschneiderten Projekten oder Anwendungen mit besonderen Anforderungen könnten andere Frameworks oder sogar eine maßgeschneiderte Entwicklung erforderlich sein.</li></ul></li></ul><ul id="d7f55a44-7ce2-4821-9a78-d3f7cfe460e7" class="bulleted-list"><li style="list-style-type:disc">Wie beliebt ist das Framework?<ul id="6d8ea5a2-5a4d-4c90-902a-a8a7482835fd" class="bulleted-list"><li style="list-style-type:circle">[In 2023] <strong>Bootstrap is used by 25.8%</strong> of all the websites whose JavaScript library we know. <strong>This is 21.1% of all websites</strong>.<ul id="98e38116-5165-42be-9c28-fa836f2307db" class="bulleted-list"><li style="list-style-type:square"><a href="https://w3techs.com/technologies/details/js-bootstrap">https://w3techs.com/technologies/details/js-bootstrap</a></li></ul></li></ul><ul id="d1f597ee-de0c-4530-a61d-e738df3240bd" class="bulleted-list"><li style="list-style-type:circle">[In 2018,] Overall, BuiltWith shows around 18 million websites using Bootstrap<ul id="07db2c16-1aa2-4bd3-b65e-65934b6500e8" class="bulleted-list"><li style="list-style-type:square"><a href="https://ostraining.com/blog/webdesign/bootstrap-popular/">https://ostraining.com/blog/webdesign/bootstrap-popular/</a></li></ul></li></ul></li></ul><ul id="71761bb2-c5c3-415e-b21d-a2c4b006abe9" class="bulleted-list"><li style="list-style-type:disc">Wie alt ist das Framework?<ul id="ff50b66b-d4e3-4230-8577-80021eac21d2" class="bulleted-list"><li style="list-style-type:circle">Es gibt es schon seit dem 19. August 2011, also etwa 12 Jahren</li></ul><ul id="86cf9140-3296-4e88-b4a0-5b2fefa601a2" class="bulleted-list"><li style="list-style-type:circle">Es ist eines der bekanntesten CSS-Frameworks überhaupt und die Community ist aktiv </li></ul><ul id="612842c7-63c5-442d-a687-7f024d1e0a9f" class="bulleted-list"><li style="list-style-type:circle">Version 5.3.1 wurde Ende Juli dieses Jahres veröffentlicht</li></ul></li></ul><ul id="a4548b5a-b528-4dad-ba61-83423d0341a6" class="bulleted-list"><li style="list-style-type:disc">Würdest du dieses Framework verwenden, um für Kunden und für dich eine Webseite zu erstellen<ul id="5825be71-625b-40c2-89eb-7d443ec73f2a" class="bulleted-list"><li style="list-style-type:circle">Es kommt immer auf das Projekt darauf an. Aber für simple und effiziente Projekte, ist es eine sehr gute Wahl. </li></ul></li></ul><ul id="2d92db16-8cb3-4aed-8e71-01c60b40ad52" class="bulleted-list"><li style="list-style-type:disc">Euer Fazit zum Framework<ul id="131be8b4-cd32-40f9-a304-6f710fa0d826" class="bulleted-list"><li style="list-style-type:circle">Ist gut zu kennen und bietet einen guten Einstieg in die Welt der Frameworks. </li></ul></li></ul><h3 id="37298850-ebb8-4655-b20b-964e2eb17d0a" class="">Tailwind</h3><ul id="b8e1c624-6969-4c60-b1c1-d379ab52649e" class="bulleted-list"><li style="list-style-type:disc">hat verschiedene Styles (z.B. dark, bright mode)</li></ul><ul id="48cb7a0e-f81f-4d37-8a60-38017f3fd652" class="bulleted-list"><li style="list-style-type:disc">arbeited mit JS Frameworks wie (Vue, JS, Angular)</li></ul><ul id="8bc89eb4-36bd-4073-9e86-8f117f59df38" class="bulleted-list"><li style="list-style-type:disc">auch nur für einfachere Webseiten (braucht viel Speicherplatz, was in Ladezeiten resultiert)</li></ul><p id="8b4784df-ce2c-472f-813b-ad45bf16cac4" class="">
+</p><h3 id="a4cfe152-1ecf-4ab4-a741-f442b752164f" class="">Pure CSS</h3><ul id="a7228161-200a-4ca8-8953-e6e53835523c" class="bulleted-list"><li style="list-style-type:disc">Leichtgewichtig<ul id="f9d007c0-33f6-40d6-8800-c66c7886f9d4" class="bulleted-list"><li style="list-style-type:circle">hat minimale Dateigrösse für gute Performance</li></ul></li></ul><ul id="8a17761a-cffb-406c-ae26-eed022e7b604" class="bulleted-list"><li style="list-style-type:disc">Responsive Design</li></ul><ul id="cf5e2317-aaf0-4b3c-be28-a7102b0a816a" class="bulleted-list"><li style="list-style-type:disc">Modularität<ul id="58b2e01b-ffef-4245-85a8-3e2d2221e354" class="bulleted-list"><li style="list-style-type:circle">man kann nur die Teile verwenden, welche man benötigt</li></ul></li></ul><ul id="33fdd4b9-0a3e-411a-8f32-91ffe3e0c8a4" class="bulleted-list"><li style="list-style-type:disc">Meisbekannt in der USA</li></ul><ul id="d5e8e288-2120-4471-9d71-9f6141fb84aa" class="bulleted-list"><li style="list-style-type:disc">Problem ist, dass es nicht oft upgedated wird</li></ul><p id="0451fd14-3934-4352-9942-f0dc9820e6c6" class="">
+</p><p id="f304884d-7f99-4f29-806e-d8cc1325b1ff" class="">Für grössere Projekte eignen sich JS-Frameworks wie Angular oder React besser. </p><figure id="a1cf6b24-1968-421a-802d-c54730e62100" class="link-to-page"><a href="Frameworks%20b2fb629057f141278626789f41a030f8/Bootstrap%20a1cf6b241968421a802dc54730e62100.html">Bootstrap</a></figure></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
