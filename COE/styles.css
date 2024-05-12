@@ -1,0 +1,312 @@
+*,*:before, *:after {
+    box-sizing: border-box ;
+    padding: 0 ;
+    margin: 0 ;
+}
+
+li, a{
+    text-decoration: none;
+}
+
+:root {
+    --main-font-family: 'Crete Round', serif;
+    --main-color: #FFFAEB;
+    --secondary-color: #31270e;
+    --paragraph-font-family: 'Kreon', serif;
+    --main-color-footer: #f6f3fd;
+    /* Imprint MT Shadow */
+}
+
+#home {
+    background-image: url("imgs/background.jpg");
+    display: block;
+    padding: 0;
+    background-position: center;
+}
+
+.main__container {
+    height: 100vh;
+    position: relative;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.main__container__logo {
+    display: block;
+    margin: auto;
+    max-width: 450px;
+    width: 90%;
+}
+
+.main__container__paragraph {
+    color: var(--main-color);
+    font-family: var(--main-font-family);
+    font-size: 20px;
+    max-width: 400px;
+    width: 80%;
+    margin: auto;
+    text-align: center;
+}
+
+.main__container__start img {
+    width: 80px;
+    display: block;
+    position: absolute;
+    left: 50%;
+    bottom: 10px;
+    transform: translate(-50%, -50%);
+    vertical-align: center;
+}
+
+#egypt {
+    background-image: url("imgs/background_egypt.jpg");
+    background-position: center;
+}
+
+#persia {
+    background-image: url("imgs/background_persia.jpg");
+    /*background-position-x: -1250px;*/
+    background-position: right;
+}
+
+#macedon {
+    background-image: url("imgs/background_macedonia.jpg");
+    background-position: center;
+}
+
+#qin {
+    background-image: url("imgs/background_qin.jpg");
+    background-position: bottom;
+}
+
+#rome {
+    background-image: url("imgs/background_rome.jpg");
+}
+
+.main__container__intro {
+    color: var(--main-color);
+    font-family: 'Anton', 'sans-serif';
+    max-font-size: 20px;
+    min-font-size: 12px;
+    font-size: 2vh;
+    position: relative;
+    text-align: center;
+    right: 70px;
+    text-shadow: rgba(49, 49, 49, 0.53) 2px 2px 3px;
+}
+
+.desert__heading {
+    font-family: 'Caesar Dressing', 'cursive';
+    text-shadow: rgba(58, 58, 58, 0.49) 4px 4px 4px;
+}
+
+#egypt__content__name {
+    color: #ffeec3;
+}
+
+#persia__content__name {
+    color: rgb(255, 244, 229);
+}
+
+#persia__content__name {
+    color: rgb(255, 244, 229);
+}
+
+.CEOs__content__heading {
+    color: var(--main-color);
+    font-size: 5vh;
+    text-align: center;
+}
+
+.CEOs__content__paragraphcontainer {
+    background-color: rgba(255, 255, 255, 0.7);
+    width: 100%;
+    padding: 10px 10px;
+    box-shadow: 0 0 10px rgba(148, 148, 148, 0.32);
+    max-height: 230px;
+    overflow: hidden;
+    position: relative;
+}
+
+.CEOs__content__paragraph {
+    color: var(--secondary-color);
+    font-family: var(--paragraph-font-family);
+    font-size: 14px;
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.read__more {
+    background-image: linear-gradient(to right, transparent, white, transparent);
+    background-color: transparent;
+    display: none;
+    border: none;
+    position: absolute;
+    max-width: 600px;
+    width: 100%;
+    height: 40px;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.CEOs__content__img {
+    display: block;
+    max-height: 358px;
+    height: 40%;
+    filter: drop-shadow(3px 3px 5px rgba(0, 0, 0, 0.43))
+}
+
+.alexander__content__img {
+    filter: drop-shadow(3px 3px 5px rgba(255, 255, 255, 0.64))
+}
+
+.CEOs__content__timespan {
+    color: var(--main-color);
+    text-shadow: rgb(0, 0, 0) 2px 1px 2px;
+}
+
+.CEOs__content__cvbutton {
+    background-image: url("imgs/button.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 200px;
+    height: 50px;
+    z-index: 5;
+}
+
+.CEOs__content__cvbutton a {
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    color: var(--main-color);
+    font-family: var(--paragraph-font-family);
+    padding: 10px 0;
+    z-index: 10;
+}
+
+.CEOs__content__cvbutton a:hover {
+    color: var(--main-color);
+}
+
+.CEOs__content__navigation {
+    position: absolute;
+    max-width: 600px;
+    width: 100%;
+    height: 20px;
+    left: 50%;
+    bottom: 20px;
+    transform: translate(-50%, -100%);
+}
+
+.CEOs__content__navigation__previous {
+    position: absolute;
+    left: 20px;
+    transform: rotate(-90deg);
+}
+
+.CEOs__content__navigation__next {
+    position: absolute;
+    right: 20px;
+    transform: rotate(90deg);
+}
+
+.CEOs__content__navigation img {
+    width: 40px;
+}
+
+#end {
+    background-image: url('imgs/background_footer.png');
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.end__thankyou {
+    color: var(--main-color-footer);
+    text-align: center;
+    font-size: 3vh;
+    width: 80%;
+}
+
+@media screen and (max-width: 600px){
+
+    .end__thankyou {
+        font-size: 20px;
+    }
+
+}
+
+.end__logo__container {
+    width: 100%;
+    margin-top: 10%;
+    height: 30%;
+    max-height: 275px;
+}
+
+.end__logo__container__logo {
+    height: 100%;
+    margin: auto;
+    display: block;
+}
+
+.end__logo__container__comingsoon {
+    color: var(--main-color-footer);
+    text-align: center;
+    font-size: 1.8vh;
+    width: 100%;
+}
+
+.end__credits {
+    color: var(--main-color-footer);
+    opacity: 50%;
+    font-size: 1.5vh;
+    max-width: 600px;
+}
+
+.end__credits a {
+    text-decoration: none;
+    color: var(--main-color-footer);
+}
+
+.end__home {
+    height: 5%;
+}
+
+.end__home img {
+    transform: rotate(-90deg);
+    height: 100%;
+}
+
+.end__copyright {
+    color: var(--main-color-footer);
+    opacity: 50%;
+    font-size: 10px;
+    margin: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
