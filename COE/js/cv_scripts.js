@@ -8,27 +8,27 @@ document.addEventListener('DOMContentLoaded', function () {
     switch (ceoValue) {
         case "Ramasses-II" :
             path = "./json/ramasses.json";
-            link = "index.html#egypt";
+            link = "CEO_of_Earth.html#egypt";
             break;
         case "Kyros-II":
             path = "./json/kyros.json";
-            link = "index.html#persia";
+            link = "CEO_of_Earth.html#persia";
             break;
         case "Alexander-The-Great":
             path = "./json/alexander.json";
-            link = "index.html#macedon";
+            link = "CEO_of_Earth.html#macedon";
             break;
         case "Qin-Shi-Huang":
             path = "./json/qin-shi-huang.json";
-            link = "index.html#qin";
+            link = "CEO_of_Earth.html#qin";
             break;
         case "Caesar":
             path = "./json/caesar.json";
-            link = "index.html#rome";
+            link = "CEO_of_Earth.html#rome";
             break;
         default :
             path = "./json/ramasses.json"
-            link = "index.html#egypt";
+            link = "CEO_of_Earth.html#egypt";
             break;
     }
 
