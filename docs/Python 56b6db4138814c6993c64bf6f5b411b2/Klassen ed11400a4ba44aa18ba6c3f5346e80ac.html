@@ -1,0 +1,831 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Klassen</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="ed11400a-4ba4-4aa1-8ba6-c3f5346e80ac" class="page sans"><header><h1 class="page-title">Klassen</h1><p class="page-description"></p></header><div class="page-body"><ul id="6ea28c19-0b13-4ea3-8b95-83ca59b29b52" class="bulleted-list"><li style="list-style-type:disc">Prozedurale Programmierung<ul id="bff3376a-778e-422d-86a5-1595dea162cd" class="bulleted-list"><li style="list-style-type:circle">Fokus auf Prozess</li></ul><ul id="8e7408c0-5ce8-4e47-975e-f05a3cdcea3b" class="bulleted-list"><li style="list-style-type:circle">Es ist jedoch schwer zu erweitern oder zu verändern</li></ul></li></ul><ul id="9aabe34f-c5c1-49e2-859b-1bd9afbb81ed" class="bulleted-list"><li style="list-style-type:disc">Klassen/Objektbasiert<ul id="50ed547d-93e3-4dfc-815a-c42deb8f012b" class="bulleted-list"><li style="list-style-type:circle">Klassen werden erstellt mit Attributen, Methoden</li></ul><ul id="e09b26c4-69c7-4d0a-9210-3d458a8ec65f" class="bulleted-list"><li style="list-style-type:circle">Klassen sind wie Baupläne und man kann mit ihnen Objekte erstellen</li></ul><ul id="6e186eef-04ec-4b6a-9b9b-fe0288c49fd7" class="bulleted-list"><li style="list-style-type:circle">Objekte sind komplexe Datenstrukturen wie eg Arrays</li></ul></li></ul><p id="ec375694-f423-4a41-8791-3a6620c510ab" class="">
+</p><p id="13ae4d1b-42f4-4935-af0f-336683ff15c0" class="">Syntax:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="6e4c025a-5dcd-42d2-85eb-5377d23f338f" class="code"><code class="language-Python">class Person:
+	# __init__ Funktion ist die Konstruktorfunktion. (Sie kann auch weggelassen werden und 
+	# würde in dem Fall trotzdem im Hintergrund &quot;unsichtbar&quot; und leer laufen.) 
+	# Sie wird automatisch ausgeführt. Self ist dabei ein Platzhalter für die Instanz
+	def __init__(self, name):
+		self.name = name
+
+person1 = Person(&quot;Martin&quot;)
+person2 = Person(&quot;Daniela&quot;)</code></pre><p id="09455bb0-8c3e-477d-8f80-54026c48e24e" class="">
+</p><p id="a9241a8f-e6ca-4915-a783-11b17937dd03" class="">Man sollte nicht manuell bei Instanzen Dinge hinzufügen. Nur was die Klasse zur Verfügung stellt. </p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="7157c6e2-815b-47ea-a792-1ee8e5becc2b" class="code"><code class="language-Python"># nicht so
+person1.height= 1.78</code></pre><p id="453d59b0-cdac-40e7-b220-d216eded329e" class="">Falls man etwas hinzufügen will, was die Klasse nicht unterstützt, sollte man die Klasse ändern. </p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="9b013b79-309f-4e76-8dc3-375418c5bb22" class="code"><code class="language-Python">class Person:
+	def __init__(self, name, height):
+		self.name = name
+		self.height = height
+
+person1 = Person(&quot;Martin&quot;, 1.78)
+person2 = Person(&quot;Daniela&quot;, 1.65)</code></pre><p id="5f9a9852-9bf0-42d1-9551-e4a7221b015f" class="">
+</p><h3 id="99af0b89-07d0-4a3f-9ed6-133926463429" class="">Methoden</h3><p id="c64e9c86-ceb8-44a8-9bdd-d29039bdd20a" class="">Methoden sind Funktionen in einer Klasse. z.B.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="0a5b6ac0-937e-49d9-9d4b-96c70663eb05" class="code"><code class="language-Python">class Person:
+	def __init__(self, name, height):
+		self.name = name
+		self.height = height
+
+	def walk(self, destination):
+		print(self.name, &quot; arrived at &quot;, destination)
+
+person1 = Person(&quot;Martin&quot;, 1.78)
+person2 = Person(&quot;Daniela&quot;, 1.65)
+
+person1.walk(&quot;Budapest&quot;)
+person2.walk(&quot;Prague&quot;)</code></pre><p id="35ba8f33-c132-4b70-8c1a-d440a450de0b" class="">Die unteren zwei Zeilen rufen die Methoden ab, es  wir folgendes geprinted:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="0f1ba3e0-5647-4067-b20d-87b686b8e56b" class="code"><code class="language-Python">Martin  arrived at  Budapest
+Daniela  arrived at  Prague</code></pre><p id="a592d191-22ee-4252-9737-8405b3b19d7b" class="">
+</p><p id="f0a367f3-6006-4f1e-a549-82be8ad66ca2" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>statische Methoden</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><p id="9eafe2c3-537a-4c04-96b7-0c48eacb990c" class="">Man kann mit der “@staticmethod”-annotation eine Methode als statisch deklarieren. Solche methoden sind nicht an eine Objekt-Instanz gebunden, sondern an die Klasse. Man kann sie also auch ohne eine Instanz verwenden, sondern direkt über die Klasse. </p><p id="4f19af6a-43c4-4940-b005-397a100f392a" class="">Jedoch hat sie, logischerweise, keine “self”-Referenz mehr</p><p id="9204fa65-d7e8-49df-96dd-70381b16bd67" class="">
+</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="d283a242-fd70-4d4d-94ac-975ccc51ca3c" class="code"><code class="language-Python">class Person:
+
+    def __init__(self, name):
+        self.name = name
+
+    def get_name(self) -&gt; str:
+        return self.name
+
+    @staticmethod
+    def hello_world():
+        print(&quot;hello World&quot;)
+
+
+person1 = Person(&quot;Markus&quot;)
+Person.hello_world() # -&gt; klappt, weil statisch
+person1.hello_world() # -&gt; klappt auch immernoch mit Objekt, obwohl statisch</code></pre><p id="a97361f5-67d8-41f1-80b3-57df63b62e52" class="">
+</p><p id="ad913e4c-5a6e-4b5c-a4dd-69fb33eaf10a" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>class-Methods</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><p id="d7e17da4-9de8-45a8-aaa1-7dc26d096664" class="">Ist ein edge case. Sind auch statisch aber haben zusätzlich ein “cls” parameter, welcher eine Referenz zur Klasse selber darstellt</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="14c88906-4deb-443a-8ed8-e8ba4494f0e9" class="code"><code class="language-Python">class Person:
+
+    def __init__(self, name):
+        self.name = name
+
+    @classmethod
+    def add_attribute_with_value(cls, attribute, value):
+        setattr(cls, attribute, value)
+        # cls[attribute] = value
+
+
+person1 = Person(&quot;Markus&quot;)
+Person.add_attribute_with_value(&quot;age&quot;, 12)
+print(person1.age) # 12
+print(Person.age) # 12</code></pre><p id="b3aa7a23-ca8f-47be-993c-2e980a02b0bf" class="">Hier wird der Klasse ein Attribut und ein dazugehöriger Wert hinzugefügt. Dies passiert mit der “classmethod”, welche eine Referenz zur Klasse “cls” hat. </p><h3 id="ca3aab9a-b85f-4a40-8047-1371acbb3391" class="">Unterschied zwischen Instanz- &amp; Klassen-variablen</h3><p id="71a95f93-6881-4a2e-8058-4e1076748bb0" class="">Beim oberen Beispiel ist “name” eine Instanz-variabel. Sie wird im <strong>init mit self</strong> definiert und der jeweiligen Instanz zugewiesen.</p><p id="21ec0bcc-cfe4-437f-a930-acab5902d52d" class="">Wenn man es jedoch so schreiben würde: </p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="5814c3b5-172c-4407-adb6-f85d77e8dc34" class="code"><code class="language-Python">class Person:
+	name = &quot;Martin&quot;
+	
+
+person1 = Person()
+print(person1.name)</code></pre><p id="ab82331d-72b1-409b-b187-b131a54d209b" class="">Dann ist “name” eine Klassen-variable. Sie ist nicht mit “self” definiert worden und ist also so im Bauplan definiert. Es hat nun also jede Person den Namen “Martin”</p><p id="5ae728fd-8029-499c-8a97-c3576fd075a5" class="">
+</p><p id="c912eae4-9d07-4936-afc8-54d77f71a5d5" class="">Wenn ich nun also schreiben würde: </p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="545e3e29-845b-41ea-ac0e-36cfeb95a74f" class="code"><code class="language-Python">class Person:
+    name = [&quot;Martin&quot;]
+
+    def add_last_name(self):
+        self.name.append(&quot;Bürki&quot;)
+
+
+person1 = Person()
+person2 = Person()
+
+person1.add_last_name()
+
+print(person1, person1.name)
+print(person2, person2.name)</code></pre><p id="a2260962-0aa3-47ac-86f0-1d2732edb0fb" class="">Bekomme ich folgendes Resultat: </p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="3d1bb794-d81f-415d-8f94-5b3e33c55882" class="code"><code class="language-Python">&lt;__main__.Person object at 0x0000027CFD7215B0&gt; [&#x27;Tinu&#x27;, &#x27;Bürki&#x27;]
+&lt;__main__.Person object at 0x0000027CFD7215E0&gt; [&#x27;Tinu&#x27;, &#x27;Bürki&#x27;]</code></pre><p id="1cad4667-7584-493a-8040-1a9adb21f1b7" class="">→ Obwohl nur bei der “person1”-Instanz der Nachname hinzugefügt wurde, hat nun die person2-Instanz auch den Nachnamen “Bürki”. </p><p id="75592b21-0ab6-4913-963a-9339058ab08e" class="">Dies ist weil die Methode “add_last_name” sucht bei der Zeile “self.name.append(”Bürki”)”, ob die Instanz einen “name” hat. Da bloss die Klasse den “name” hat, macht es einen Fallback auf die Klassenvariable “name = [”Martin”]”</p><p id="28ab05fe-dbbb-4e63-bc57-52593ab3ac90" class="">Da beide Personen Instanzen von derselben Klasse sind, wird nun bei beiden der Nachname hinzugefügt. </p><p id="2778fd78-86b3-440b-9dc9-de31071d4f4e" class="">
+</p><p id="65c47be0-14f2-4ca2-8f93-948327778f69" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong>Achtung: </strong></strong></strong></strong></strong></strong></strong></strong></strong>Wenn ich es jedoch so schreiben würde:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="c0bf39ee-bc89-4f36-9abd-fa8cb2572831" class="code"><code class="language-Python">class Person:
+    name = &quot;Tinu&quot;
+
+    def add_last_name(self):
+        self.name = &quot;Jaqueline&quot;
+
+
+person1 = Person()
+person2 = Person()
+
+person1.add_last_name()
+
+print(person1, person1.name)
+print(person2, person2.name)</code></pre><p id="c5cefcdf-3209-47f4-a2e0-2693356cf917" class="">bekomme ich das: </p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="78f4c72f-29b8-437f-9903-2550540fd100" class="code"><code class="language-Python">&lt;__main__.Person object at 0x00000234EB8315B0&gt; Jaqueline
+&lt;__main__.Person object at 0x00000234EB8315E0&gt; Tinu</code></pre><p id="181dc94d-a20e-467e-a94f-137da597665c" class="">Der Unterschied ist das Gleichzeichen. Bei “self.name = “Jaqueline”. Denn nun sieht der code, dass zwar keine Instanz-Variable “name” vorhanden ist, macht jetzt jedoch nicht einen Fallback auf die Klassenvariable “name” sondern erstellt einfach direkt eine Instanzvariable. </p><p id="05328e02-2b67-4c11-9baf-fa195b6b23f8" class="">(Beim vorherigen Beispiel wurde “append” verwendet anstatt “=”. Append setzt nicht etwas gleich, sondern verändert etwas existierendes, macht also einen Fallback)</p><p id="0476d5c8-1eb6-4eec-b040-9bf53e562894" class="">
+</p><h2 id="91f1ff40-d662-4606-b997-5249969b2f8c" class="">Vererbung</h2><p id="4b0d335a-139f-49d2-ab49-2010d2acc81e" class="">
+</p><p id="0d16c4e9-4c5f-4fdd-80a9-b624787d89a3" class="">Klassen können von anderen Klassen erben. Dies geschieht zum Beispiel so: </p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="de5703b3-cbfd-4b3e-aba8-262974a2adc1" class="code"><code class="language-Python">class Rectangle:
+
+    def __init__(self, length, width):
+        self.length = length
+        self.width = width
+
+    def area(self):
+        print(self.length * self.width)
+
+
+class Square(Rectangle):
+
+    def __init__(self, length):
+        self.length = length
+        super().__init__(self.length, self.length)
+
+
+my_rect = Rectangle(3, 6)
+my_square = Square(3)
+
+my_square.area()
+my_rect.area()</code></pre><p id="542d3500-4cc1-4e46-81f9-95c53960886f" class="">
+</p><p id="75155279-58d8-43f8-8f1b-65a27a0ab5ed" class="">Hier erbt die Klasse “Square” von der Klasse “Rectangle”, indem bei der Klasse Square vornedran in Klammer die “parent”-Klasse definiert wird. (<code>class Square(Rectangle)</code>)</p><p id="60306560-0a71-45c2-95b3-b30fd3a00a2a" class="">Dabei ist es wichtig, dass im Konstruktor von “Square” auch der Konstruktor von “Rectangle” ausgeführt wird. Dies wird hier mit dem <code>super().__init__()</code> gemacht. Das Keyword “super()” ist eine Instanz der Elternklasse. </p><p id="b2847571-1efd-44e2-8847-8749fa1b3624" class="">Jetzt kann, wie in der zweitletzten Zeile gezeigt, die Methode <code>area</code> vom Object “my_square” ausgeführt werden, obwohl die Klasse Square keine solche Methode definiert hat. Dies ist eben, weil es nun diese Methode von “Rectangle” geerbt hat. Wenn der Code also in der Square Klasse keine “area”-Methode findet, geht er nun in der/den Elternklasse/n suchen. </p><p id="35c9aad0-4907-40c7-8c49-9bfc387b578c" class="">Dasselbe gilt auch für Attribute.</p><p id="fdfad8c6-7df7-42de-88c6-99092c8b9391" class="">
+</p><h3 id="b05e44af-af58-483e-a8f4-d7f49014d487" class="">Abstrakte Klassen</h3><p id="bf9a4ba5-0fcd-421b-82ed-44b0379636e9" class="">Abstrakte Klassen sind Klassen, welche Methoden oder Attribute enthalten, welche von anderen Klassen vererbt werden können und überschrieben (personalisiert) werden müssen. </p><p id="de9db6c7-c9e1-47c5-8bf7-8e1beec23f2d" class="">In Python sind sie nicht standardmässig enthalten und werden deswegen auch kaum benutzt. </p><p id="8a890e79-f6f2-4e29-a321-83c3a98d25cf" class="">Dies sieht z.B. so aus:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="7e4e3ce0-7158-4691-8012-969c8b40a69d" class="code"><code class="language-Python">from abc import abstractmethod
+
+
+class AbstractMethods:
+    def __init__(self):
+        pass
+
+    @abstractmethod
+    def implement_me(self):
+        print(&quot;I need to be implemented&quot;)
+
+
+class MyMethods(AbstractMethods):
+    def __init__(self):
+        super().__init__()
+</code></pre><figure id="7fa6c576-1a15-42e9-878f-51ea5ff62ea2" class="image" style="text-align:left"><a href="Klassen%20ed11400a4ba44aa18ba6c3f5346e80ac/Untitled.png"><img style="width:625px" src="Klassen%20ed11400a4ba44aa18ba6c3f5346e80ac/Untitled.png"/></a><figcaption>Warnung der IDE weil die abstrakte Methode “implement_me” nicht überschrieben wurde</figcaption></figure><h3 id="7b19ab0d-860d-4089-b2e6-175adca9ebb8" class="">Vererbung von mehreren Klassen</h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="8adad454-b67e-4720-a5ec-a452c3a7e79a" class="code"><code class="language-Python">class A:
+    def __init__(self):
+        print(&quot;Constructor of class A&quot;)
+
+
+class B:
+    def __init__(self):
+        print(&quot;Constructor of class B&quot;)
+
+
+class C(A, B):
+    def __init__(self):
+        A.__init__(self)
+        B.__init__(self)
+
+
+obj = C()</code></pre><p id="27cf1812-ff95-442a-b810-aa4c39e12416" class="">Klasse C vererbt hier von zwei Klassen. Um bei beiden den Konstruktor auszulösen, müssen beide init Funktionen separat ausgeführt werden. </p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

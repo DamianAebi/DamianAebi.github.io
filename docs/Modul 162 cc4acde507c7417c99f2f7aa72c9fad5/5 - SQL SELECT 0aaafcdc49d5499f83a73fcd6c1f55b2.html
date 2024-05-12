@@ -1,0 +1,702 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>5 - SQL SELECT</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="0aaafcdc-49d5-499f-83a7-3fcd6c1f55b2" class="page sans"><header><h1 class="page-title">5 - SQL SELECT</h1><p class="page-description"></p></header><div class="page-body"><p id="b055b175-9243-48d4-af7c-d6366407f7a9" class="">SQL ist eine Datenbanksprache zur Definition, Abfrage und Manipulation von Daten in <em>Relationalen Datenbanksystemen. </em></p><p id="4f79e70d-a213-4880-a4c1-f4376dd69e16" class="">Es ist momentan laut TIOBE die 10.-meistverwendete Sprache der Welt. </p><p id="89c012a5-0249-4dad-b1aa-aca4ab248612" class="">Wird verwendet für</p><ul id="82723c35-2fc0-4e12-a6e2-c6fffdfd7fba" class="bulleted-list"><li style="list-style-type:disc">Datenmanipulation</li></ul><ul id="31f28bef-3efc-4ed4-8f9f-6cf71d8f776e" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">Datenabfrage</mark></li></ul><ul id="5f401eb1-ecbf-4349-bf87-c2a9b7dc1550" class="bulleted-list"><li style="list-style-type:disc">Datendefinition (Befehle zur Definition des Datenbankschemas, z.B. Tabellen löschen, definition von Primärschlüssel etc.)</li></ul><ul id="e5c8d2c5-925f-4066-b5d7-5da3cbba33fa" class="bulleted-list"><li style="list-style-type:disc">Datenrechtsverwaltung</li></ul><ul id="c8a8f92e-27b9-4461-a48c-f68a74d4a40c" class="bulleted-list"><li style="list-style-type:disc">Transaktoinskontrolle</li></ul><p id="f21ed3b9-dc9b-40ca-9b8c-e85d40ab035d" class="">In diesem Modul beschäftigen wir uns mit der Datenabfrage.</p><p id="ae3088ef-9d15-40a7-9c3e-f7fd31ba66f8" class="">
+</p><p id="d77af164-2019-4ec4-9b09-695395c6c325" class=""><strong>Befehle</strong></p><table id="6d475b3d-d92b-485e-b9f3-907f0749ef9d" class="simple-table"><tbody><tr id="6bae2d84-120f-4ef7-9d27-6c548dccede6"><td id="q[g[" class=""><strong>Command</strong></td><td id="GeTy" class=""><strong>Description</strong></td></tr><tr id="f97bb832-7b4a-4e42-8252-fb398f12d9b9"><td id="q[g[" class="">SELECT</td><td id="GeTy" class="">Select data</td></tr><tr id="eb403b63-0ed5-4d6d-a9c9-05594924e84f"><td id="q[g[" class="">INSERT</td><td id="GeTy" class="">Insert data</td></tr><tr id="dc873fa5-6c63-4e75-a539-efe83c1c82c9"><td id="q[g[" class="">UPDATE</td><td id="GeTy" class="">Update or modify data</td></tr><tr id="3718fe24-b277-4508-8331-8a0425af99ae"><td id="q[g[" class="">DELETE</td><td id="GeTy" class="">Delete data</td></tr></tbody></table><p id="a7cad059-3088-40f0-bf95-0d5ff8fda504" class=""><strong>Aggregatsfunktionen</strong></p><table id="4b50818b-56f0-4daf-9b5c-96e9e80d7235" class="simple-table"><tbody><tr id="facdaa64-0a33-49f9-aa8c-6b909f99f7e9"><td id="];~W" class=""><strong>Function</strong></td><td id="gFge" class="" style="width:406.98150634765625px"><strong>Description</strong></td></tr><tr id="3e2e117e-8f18-4915-b335-139666aaf2e1"><td id="];~W" class="">SUM</td><td id="gFge" class="" style="width:406.98150634765625px">Summarizes the values in a column (numerical data types only)</td></tr><tr id="faac3914-0f75-4898-a56c-bf544ffc7f25"><td id="];~W" class="">AVG</td><td id="gFge" class="" style="width:406.98150634765625px">Calculates the average of the values in a column (numerical data types only)</td></tr><tr id="24df45e7-c161-4b2b-ac8c-0b560993a65f"><td id="];~W" class="">COUNT</td><td id="gFge" class="" style="width:406.98150634765625px">Returns the number of data records</td></tr><tr id="c4bb60ec-8242-43c2-8fb3-feebb0cf7b0e"><td id="];~W" class="">COUNT DISTINCT</td><td id="gFge" class="" style="width:406.98150634765625px">Returns the number of unique/different values</td></tr><tr id="607fbc0c-7559-4bfc-bf4c-237484e1da49"><td id="];~W" class="">MIN</td><td id="gFge" class="" style="width:406.98150634765625px">Returns the smallest value in a group</td></tr><tr id="f25705dd-31b7-4ec6-a26f-3f12b6b29599"><td id="];~W" class="">MAX</td><td id="gFge" class="" style="width:406.98150634765625px">Returns the largest value in a group</td></tr></tbody></table><ul id="67ca03a1-5f15-45c3-ab97-10e663295059" class="bulleted-list"><li style="list-style-type:disc">Schlüsselwörter werden grossgeschrieben</li></ul><ul id="57a69d06-ee2f-405c-8aa2-e17724e3d357" class="bulleted-list"><li style="list-style-type:disc">Attribut- und Tabellennamen werden so geschrieben wie beim Anlegen der Tabellen</li></ul><ul id="670dfca2-cc61-4281-b539-f6b7501992da" class="bulleted-list"><li style="list-style-type:disc">Beispiel: SELECT Vorname, Nachname FROM Lernende;</li></ul><h1 id="4c3951ca-b732-4e18-9800-5aedc155fa92" class="">Select</h1><p id="0fb13c5a-de58-4b9b-ad15-fdf3428818e8" class=""><code>SELECT</code></p><p id="878adc10-f0ba-4ea3-be23-4df77a0e66b4" class=""><code>[ DISTINCT | ALL ]</code></p><p id="6d532140-9f36-446d-b457-c353df8c09eb" class=""><code>&lt;Spaltenliste&gt;</code></p><p id="6996df65-1438-4c9d-bfc1-4a16bad46b94" class=""><code>FROM &lt;Tabelle&gt;</code></p><p id="b59e1dca-3ee3-4e0f-a728-90605b8885ee" class=""><code>[ WHERE-Klausel ]</code></p><p id="0643acb4-f136-4d2d-910d-48a4fb8a4632" class=""><code>[ GROUP BY-Klausel ]</code></p><p id="43b17e93-70b6-4fbe-925b-841f7b2fd581" class=""><code>[ HAVING-Klausel ]</code></p><p id="32673a6a-3cfb-40a5-bf7b-a1004d531a69" class=""><code>[ UNION [ALL] SELECT-Befehl ]</code></p><p id="d4435538-4ac3-4a3e-8efe-4fb179d788d9" class=""><code>[ ORDER BY-Klausel ];</code></p><p id="b8e1b8da-b4a4-4a40-831d-7ee364b80ecf" class="">
+</p><p id="91b45ae2-a6d7-4026-a2d5-c1d7fab94ebd" class="">Mindestens erforderlich sind: Das Schlüsselwort SELECT, eine Liste von Spalten (&lt;select list&gt;), das Schlüsselwort FROM und ein Tabellenname (&lt;table reference list&gt;).</p><p id="828d16ec-5b70-466d-967a-217cd6a17564" class=""><em>Beispiel: SELECT Vorname, Nachname, Jahrgang FROM Lernende;<br/>Es werden Vorname, Nachname und Jahrgang von allen Lernenden ausgegeben.<br/></em></p><h3 id="4d364887-9d57-4141-8580-6f09e05d63af" class="">LIMIT</h3><p id="9dfa061e-0eca-4596-9b7c-c8a0fa38cec9" class="">Wenn nur eine bestimmte (bzw. maximale) Anzahl von Zeilen ausgegeben werden soll, kann die LIMIT-Klausel ans Ende des SELECT-Befehls gesetzt werden.</p><p id="10e5d047-9456-4926-a4ff-fe5b6872b3f0" class=""><code>SELECT Vorname, Nachname, Geburtsdatum FROM Lernende LIMIT 10;</code></p><h3 id="aa24f559-1a97-4ec7-8ad2-796ae3f026c7" class=""><strong>AS</strong></h3><p id="c1281a06-7167-48d1-8bf5-afc38076c5a4" class="">Mit AS kann sowohl ein Spaltentitel geändert werden als auch ein Alias für den Tabellennamen erstellt werden.</p><p id="3528a5f7-9991-46a0-8c0c-788da0bb12ee" class=""><code>SELECT Vorname || &#x27; &#x27; || Nachname AS &#x27;Name&#x27;, Strasse, Plz, Ort FROM Lernende;</code></p><h3 id="8a40338d-2e67-41a1-9b14-1764b1631606" class=""><strong>Berechnungen</strong></h3><p id="4783a0a4-dda4-4ea0-a4c5-24df2cc019fe" class="">Man kann bei numerischen Attributen Berechnungen im SELECT verwenden:</p><p id="5f2502ba-6f3a-4570-877d-def340658122" class=""><code>SELECT Artikelname, Preis * 1.2 FROM Artikel;</code></p><h3 id="40f193c7-d7da-4b92-a68e-5c9b1f15b777" class=""><strong>ORDER BY</strong></h3><p id="4f805739-1dd2-4132-948b-ea7a922b59a2" class="">Mit der ORDER BY-Klausel kann die Ausgabe sortiert werden, was in vielen Fällen Sinn macht.</p><p id="90bf989b-3e2c-4087-a090-0da321160c9b" class=""><code>SELECT * FROM Lernende ORDER BY Ort, Nachname;</code></p><ul id="91c27174-dff6-4592-989b-60a11ac85afc" class="bulleted-list"><li style="list-style-type:disc"><strong>&gt;</strong> Es werden alle Lernenden ausgegeben, und zwar sortiert: In erster Linie nach Ort und in zweiter Linie nach Nachnamen (in den Fällen, wo es mehrere Lernende pro Ort gibt).</li></ul><ul id="95a439b0-e704-4cc7-9193-28b73a0d088d" class="bulleted-list"><li style="list-style-type:disc">man kann auch ASC (ascending, aufsteigend) und DESC (descending, absteigend) dahinter setzen um die Reihenfolge zu definieren</li></ul><p id="51ba68d4-b14a-40b0-94e6-bccfe6f9d9b9" class="">
+</p><hr id="9725acbe-aa5b-4435-a88a-101951dd13d4"/><h1 id="d83af8bc-93b9-4fa9-bc7b-a8d8f4f19d7e" class="">WHERE</h1><p id="294d0b96-a96b-4968-b9a4-30255c4f6e7b" class="">Mit der WHERE-Klausel können wir Bedingungen formulieren, damit wir nur die gewünschten Datensätze erhalten</p><p id="b8607458-4535-4d5c-b5d2-220f4150da2a" class="">Zur Filterung stehen uns folgende Möglichkeiten zur Verfügung:</p><table id="0eb36910-4ca9-4ade-9684-768a19dcaabf" class="simple-table"><tbody><tr id="4b83f3e5-7245-41bb-be71-e7d2733cca31"><td id="GWZj" class="">Operator</td><td id="JdrG" class="">Beschreibung</td></tr><tr id="3297269c-4dcf-4f2a-9573-c704199445b2"><td id="GWZj" class="">=</td><td id="JdrG" class="">Gleich</td></tr><tr id="7de371cb-7910-42d6-896c-5dbc1a8e261f"><td id="GWZj" class="">&lt; &gt;</td><td id="JdrG" class="">Ungleich</td></tr><tr id="46859046-523e-43a5-be59-a27142488bc7"><td id="GWZj" class="">&lt;</td><td id="JdrG" class="">Kleiner</td></tr><tr id="0dce880a-4cc4-4415-a3cc-cf9cbb4fb6f6"><td id="GWZj" class="">&lt;=</td><td id="JdrG" class="">Kleiner oder gleich</td></tr><tr id="aa5eab73-de0d-43e2-80da-c26c4fa717d6"><td id="GWZj" class="">&gt;</td><td id="JdrG" class="">Größer</td></tr><tr id="9b9154e5-a8f4-4d2a-9e0d-aa5a54b451b4"><td id="GWZj" class="">&gt;=</td><td id="JdrG" class="">Größer oder gleich</td></tr><tr id="11d97ae7-e9d2-4422-a98f-67db994c949b"><td id="GWZj" class="">NOT</td><td id="JdrG" class="">Negation</td></tr><tr id="5bc808c3-6594-44e2-94e9-8d1ad81b83a2"><td id="GWZj" class="">AND</td><td id="JdrG" class="">Logisches UND</td></tr><tr id="3f2cd55b-87f7-4e12-91b6-de34df0efd89"><td id="GWZj" class="">OR</td><td id="JdrG" class="">Logisches ODER</td></tr><tr id="73545bd4-c4de-4d46-9fe0-a74e410002b0"><td id="GWZj" class="">BETWEEN...AND</td><td id="JdrG" class="">Zwischen zwei Werten</td></tr><tr id="d07f4edb-52b2-41c4-aa3a-949398543be2"><td id="GWZj" class="">LIKE</td><td id="JdrG" class="">Ähnlich wie</td></tr><tr id="e5ebc526-d33e-4a8e-970c-8410d8a5900b"><td id="GWZj" class="">%</td><td id="JdrG" class="">Platzhalter für eine beliebige Anzahl an Zeichen</td></tr><tr id="0645244b-77db-468f-a5eb-852624dcdf32"><td id="GWZj" class="">_</td><td id="JdrG" class="">Platzhalter für ein beliebiges Zeichen</td></tr><tr id="c6c28246-b72a-4653-9d0d-fe2b7df26ca6"><td id="GWZj" class="">IS NULL</td><td id="JdrG" class="">Prüfung auf &quot;kein Wert&quot;, achtung “” leerer string ist nicht NULL</td></tr></tbody></table><p id="1184b737-fcf9-4f21-b5da-5f2a08859772" class="">Sämtliche Operatoren und Bedingungen können sowohl bei alphanumerischen (Zeichenketten) als auch numerischen (Zahlen) Wertebereichen angewendet werden.</p><p id="cc7037da-f233-44e2-8722-7dd1dc1f9c47" class=""><strong>Beispiel:</strong></p><p id="01af1d6a-a504-4d22-99f8-4992c47b13fb" class=""><code>SELECT * FROM lernende WHERE jahrgang = 2005</code></p><p id="a720acfc-7a00-477d-9674-bb235232e2ba" class=""><code>SELECT * FROM lernende WHERE nachname BETWEEN &#x27;D&#x27; AND &#x27;N’</code></p><h3 id="a87214b3-d251-46ba-8309-f7e1321f71cf" class="">Platzhalter</h3><table id="8c2c910d-56c7-4d80-95fe-313b5b55d40d" class="simple-table"><tbody><tr id="7f0d5fcc-b620-4152-853c-45d9f1ef2a72"><td id="cszb" class=""><strong>Windows / Linux</strong></td><td id="T=@l" class=""><strong>SQL</strong></td><td id="ReV?" class=""><strong>Bedeutung</strong></td></tr><tr id="608fdb2f-6c8e-4121-b346-11bb01ca864a"><td id="cszb" class="">*</td><td id="T=@l" class="">%</td><td id="ReV?" class="">Platzhalter für beliebige Zeichen, z.B. &quot;M%&quot; = alles, was mit M beginnt</td></tr><tr id="317ce04a-8320-4341-98ec-63eb7636e2cd"><td id="cszb" class="">?</td><td id="T=@l" class="">_(Underscore)</td><td id="ReV?" class="">Platzhalter für ein Zeichen, z.B. &quot;Ju_er&quot; = die Nachnamen &quot;Juker&quot; und &quot;Jufer&quot; (und allenfalls weitere Nachnamen)</td></tr></tbody></table><p id="776d096c-b43a-4616-9cf7-0a85ba54870c" class="">Platzhalter können ausschliessliche mit der LIKE-Klausel verwendet werden.</p><p id="726e324b-36a1-4169-ab59-f3325c59a000" class=""><code>SELECT * FROM Lernende WHERE Nachname LIKE &quot;M%&quot;;</code></p><p id="a1a6cee0-1ed8-4b17-9380-8d07c35264a7" class="">Alle Lernenden, deren Nachname mit &quot;M&quot; beginnt, werden ausgegeben.</p><p id="f486a9a9-d35b-46f3-a229-e87e02976907" class="">
+</p><p id="61c5be0d-6525-4f74-a7d5-acac0055ace8" class=""><strong>Korrekte Abfrage auf leere Werte</strong></p><p id="f073a725-dda8-463b-88ac-c1931069fd07" class="">Da wir in der Regel nicht wissen, ob in den Daten leere Zeichenketten oder NULL-Werte vorhanden sind, sollten wir Abfragen immer wie folgt formulieren:</p><p id="74ed5ba7-0830-4eeb-8223-077c808014fb" class=""><code>SELECT * FROM Lernende WHERE Firma = &quot;&quot; OR Firma IS NULL;</code></p><hr id="0ae53278-3d71-436c-9449-1f1b7b9e7a5d"/><h2 id="53d6bc3c-66ce-45d1-8666-15d271a14990" class="">GROUP BY</h2><p id="cb4ff5af-6974-4be9-887d-84754a5e113c" class="">Wenn wir alle Wohnorte der Lernenden ausgeben wollen, können wir folgende Abfrage verwenden:</p><p id="3f591254-c5f5-49b7-b2a6-ae4db8a22c4a" class=""><code>SELECT DISTINCT Ort FROM Lernende;</code></p><p id="4fb20f38-15e5-4f1e-9201-70ae86729261" class="">Eine zweite Möglichkeit, die dasselbe Ergebnis liefert, ist folgende Abfrage:</p><p id="d94c2755-6ad4-4a96-97eb-5e2cccd7f923" class=""><code>SELECT Ort FROM Lernende GROUP BY Ort;</code></p><p id="9250158a-cbc5-467b-8ca4-515ca263a741" class="">Was ist der Sinn von GROUP BY (warum kompliziert, wenn es auch einfacher geht)? Diese Klausel wird v.a. dafür verwendet, gruppenweise Auswertungen durchzuführen (Aggregatsfunktion), was mit DISTINCT nicht möglich ist.</p><p id="086429f7-7ba3-44e5-b322-148215061cf7" class=""><code>SELECT Ort, AVG(2021-Jahrgang) AS &quot;Durchschnittsalter&quot; FROM Lernende GROUP BY Ort;</code></p><ul id="4b3304b0-b532-4364-bfde-600e93cf8ffe" class="bulleted-list"><li style="list-style-type:disc"><strong>&gt;</strong> Das durchschnittliche Alter der Lernenden pro Ort wird ausgegeben.</li></ul><p id="d3bf7a34-a9d2-4c9a-97e7-3e59d72b8b20" class="">
+</p><p id="82d8378b-075c-425f-9ab8-971d9bffa700" class="">Es ist auch möglich, nach einem Paar von Attributen zu gruppieren: </p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="0ac26558-0b56-45d9-94f2-f518b004add8" class="code"><code class="language-SQL">SELECT blockfloor Floor, blockcode as Block, Count(*) as &quot;Number of available rooms&quot; 
+FROM room 
+WHERE unavailable = &#x27;f&#x27; 
+GROUP BY blockfloor, blockcode 
+ORDER BY blockfloor, blockcode;</code></pre><figure id="d0cd93bc-2caa-4f57-9eef-240038f94399" class="image"><a href="5%20-%20SQL%20SELECT%200aaafcdc49d5499f83a73fcd6c1f55b2/Untitled.png"><img style="width:1737px" src="5%20-%20SQL%20SELECT%200aaafcdc49d5499f83a73fcd6c1f55b2/Untitled.png"/></a><figcaption>Die blockfloor - blockcode - Kombination “1 1 f” kommt 3 mal vor, also steht 3. “1 2 f” zweimal, also 2 </figcaption></figure><h3 id="d9d41677-4e76-4bea-8bb2-5dfda3328276" class="">HAVING</h3><p id="d7a31d7b-10da-47fa-914a-5ce58338520b" class="">Mit having kann bei GROUP BY zusätzlich ein Filter gesetzt werden. <code>SELECT Ort, AVG(2021-Jahrgang) AS &quot;Durchschnittsalter&quot; FROM Lernende GROUP BY Ort HAVING Ort &gt; &quot;Berlin&quot;;</code></p><p id="368b14d5-1fc3-43df-ae46-48ae45431bd8" class="">
+</p><hr id="43173d94-76fe-4479-8cc6-b4caf57c73d3"/><h3 id="ab0c4399-f740-4d76-8341-2cbf121ce6f6" class="">Sortierung von Zeichenketten</h3><ul id="54dfa589-db11-4a77-a876-d98d8bb7b02a" class="bulleted-list"><li style="list-style-type:disc">numerische Sortierung<ul id="e1207461-3585-47eb-9687-b5ec6f48a22d" class="bulleted-list"><li style="list-style-type:circle">1, 2, 3, 4, 5, 10, 20, 30, 100, 200</li></ul><ul id="fe5f10fc-2b42-4a63-8bc8-4788b8030a73" class="bulleted-list"><li style="list-style-type:circle">→ Sortierung nach Grösse der Zahl</li></ul></li></ul><ul id="21026100-fbe4-4c8d-a053-ce32768cd62c" class="bulleted-list"><li style="list-style-type:disc">alphanumerische Sortierung<ul id="caad56e3-bb66-4570-9ceb-f4e8b886177e" class="bulleted-list"><li style="list-style-type:circle">“1”, “10”, “100”, “2”, “20”, “200”, “3”, “30”, “4”, “5”</li></ul><ul id="0f10bf9e-7a47-47fc-9be0-cf29878a334e" class="bulleted-list"><li style="list-style-type:circle">→ Sortierung nach ASCII Tabelle</li></ul><ul id="49c58bb4-0804-4b80-9b64-975fde1b844f" class="bulleted-list"><li style="list-style-type:circle">wobei bei gleichen Anfängen zweier Zahlen die Kürzere gewählt wird</li></ul></li></ul><h3 id="a688b087-75bd-42a6-96fb-355e25a513b0" class="">SELECT mit Concat</h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="77851897-4d85-4e72-9789-961918448525" class="code"><code class="language-SQL">SELECT employee_id, CONCAT(last_name, &#x27;, &#x27;, first_name) 
+FROM employee;</code></pre><figure id="327f8340-b4de-48f9-88d1-557f7a01cc57" class="image" style="text-align:left"><a href="5%20-%20SQL%20SELECT%200aaafcdc49d5499f83a73fcd6c1f55b2/Untitled%201.png"><img style="width:288px" src="5%20-%20SQL%20SELECT%200aaafcdc49d5499f83a73fcd6c1f55b2/Untitled%201.png"/></a></figure><h3 id="fb4fb23a-f856-4d89-8bc4-6487e4a85164" class="">SQL Island, JOIN beispiel:</h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="788a4bdd-a9f9-4f92-a66d-7217262981f8" class="code"><code class="language-SQL">SELECT SUM(bewohner.gold) FROM bewohner, dorf WHERE dorf.dorfnr = bewohner.dorfnr AND dorf.name = &#x27;Gurkendorf&#x27;</code></pre><p id="4e11d32b-623b-4752-8331-cca8d8b49d5a" class="">
+</p><p id="e4dfc3a7-c279-4dde-9367-9e42b8fa082a" class="">
+</p><p id="c6e8f6cb-d0e5-4354-8082-13a441a95c3e" class="">
+</p><p id="8d4f5d09-22ea-47d7-9865-37df3ebcc7fa" class="">
+</p><p id="bf3db31c-0a95-4c5b-8b7a-175ddd1c8469" class="">
+</p><p id="4273b871-f153-4f8b-a345-f2dcbe4339d4" class="">
+</p><p id="ba99ba91-8bc6-45a1-8584-3ab44615ac2d" class="">
+</p><p id="991cd322-55d0-4408-9c37-aecc404c1b22" class="">
+</p><p id="6409bd0b-2f7e-4195-9f62-f91a7583260c" class="">
+</p><p id="807857eb-6239-41af-a569-ff6b10601b43" class="">
+</p><p id="de7c56f6-6c99-499c-b778-024d64b95832" class="">
+</p><p id="fc113b48-e2ea-47a6-8daa-a4c2715d2d29" class="">
+</p><p id="fdb83836-4479-49d1-88f4-03df856e01ea" class="">
+</p><p id="a67c4262-abfd-4814-aa38-0b69898d6b98" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

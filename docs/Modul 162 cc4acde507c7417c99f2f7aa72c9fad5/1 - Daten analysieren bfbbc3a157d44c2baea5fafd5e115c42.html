@@ -1,0 +1,685 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>1 - Daten analysieren</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="bfbbc3a1-57d4-4c2b-aea5-fafd5e115c42" class="page sans"><header><h1 class="page-title">1 - Daten analysieren</h1><p class="page-description"></p></header><div class="page-body"><h2 id="8fe88de1-d0b9-44ef-93f5-23841d17ab68" class=""><strong>Lernziele</strong></h2><ol type="1" id="93c72f4a-6de2-4fa6-a4ee-c8d6587c0f20" class="numbered-list" start="1"><li>Ich weiss, was analoge und digitale Signale und Daten sind.</li></ol><ol type="1" id="246ee074-68bc-4e7e-9788-194c1bd3c134" class="numbered-list" start="2"><li>Ich weiss, was Dateien sind und wie Dateitypen unterschieden werden können.</li></ol><ol type="1" id="a44fb83b-b4f4-4430-9288-c755446c4f68" class="numbered-list" start="3"><li>Ich kenne den Unterschied zwischen unstrukturierten, semistrukturierten und strukturierten Daten.</li></ol><ol type="1" id="4f5a4033-b5ae-448c-97e1-3d01ca038013" class="numbered-list" start="4"><li>Ich weiss, was Redundanzen und Inkonsistenzen sind.</li></ol><ol type="1" id="d8769f30-be84-4a3b-a643-b4936962bf4d" class="numbered-list" start="5"><li>Ich kann in einer Exceldatei Suchen und Auswertungen durchführen.</li></ol><ol type="1" id="4aac0042-a47a-43e0-83f1-3831f0362b43" class="numbered-list" start="6"><li>Ich kenne die Vor- und Nachteile der Verwaltung von Daten in Excel.</li></ol><p id="14e7c904-a640-4b20-ba5f-5186793e2fcf" class="">
+</p><h2 id="a6489e25-62b6-481c-8ae9-f27584ea62cb" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Unterschied analog &amp; Digital</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></h2><ul id="414de708-f62b-4a2b-bbfe-ef985bd17952" class="bulleted-list"><li style="list-style-type:disc">Die Natur ist <strong>analog</strong>, sie verhält sich in Wellen <ul id="f51ffe57-0688-4cdd-ae72-383ed8d6daff" class="bulleted-list"><li style="list-style-type:circle">Schallwellen (Klang)</li></ul><ul id="fac078bc-354c-44f8-a325-884032d52c9c" class="bulleted-list"><li style="list-style-type:circle">Elektromagnetische Wellen (Licht)</li></ul><ul id="db8fc8ae-1834-43e6-ac06-de298faac145" class="bulleted-list"><li style="list-style-type:circle">Es ist theoretisch stufenlos</li></ul><ul id="287ecabd-983c-4019-9acf-116ddc309c3e" class="bulleted-list"><li style="list-style-type:circle">Weitere Beispiele: Vynilplatte, Thermomether, Mikrofone &amp; Kasettenrekorder</li></ul></li></ul><ul id="dd650a6e-7540-43a1-8861-249a7594d2b4" class="bulleted-list"><li style="list-style-type:disc">Computer-Daten sind <strong>digital</strong>, sie verhalten sich strikt und messbar<ul id="e558da33-6c94-4952-8baa-395ba17f9645" class="bulleted-list"><li style="list-style-type:circle">eine Computerdatei besteht aus nullen und einsen, nicht aus Wellen</li></ul><ul id="2a2c586f-126a-46e6-ac4d-0e2247d357e2" class="bulleted-list"><li style="list-style-type:circle">kann nur bestimmte Werte aufnehmen</li></ul><ul id="d2939e84-8801-47a4-982e-81cc7d8cf730" class="bulleted-list"><li style="list-style-type:circle">werden elektronisch gesammelt</li></ul></li></ul><p id="1b90a320-a35e-4458-bc13-4240b15c8242" class="">
+</p><p id="35b50cde-efc2-4efd-9395-d1d0be69dd20" class="">Analoge Daten können auch digitalisiert werden. Z.B. ein analoges Foto kann eingescannt werden oder auch Musik / Texte</p><p id="aeec9c5d-f127-413d-a4d9-839f9b9e7c53" class="">
+</p><h2 id="6e5f9877-66a0-4863-865d-05cb66adb775" class=""><strong><strong><strong><strong><strong><strong><strong>Dateien</strong></strong></strong></strong></strong></strong></strong></h2><ul id="68ec79e6-e4ed-4650-b395-0e775bb8fb30" class="bulleted-list"><li style="list-style-type:disc">Besteht aus Daten</li></ul><ul id="8bf0b994-69f6-484e-94d1-5007c3d0b415" class="bulleted-list"><li style="list-style-type:disc">Gespeichert auf Medium / persistent</li></ul><ul id="72dce308-3a21-4366-801b-3edaf8d11049" class="bulleted-list"><li style="list-style-type:disc">Zum Besipiel<ul id="fb558dd4-a021-401a-a4f1-d5b33bddd3f5" class="bulleted-list"><li style="list-style-type:circle">.exe</li></ul><ul id="009344d2-3ed3-44cb-b8fe-f541dd930e7e" class="bulleted-list"><li style="list-style-type:circle">.jpg</li></ul><ul id="340cdaec-1ee7-4963-bed2-48c67974dcd2" class="bulleted-list"><li style="list-style-type:circle">.wav</li></ul><ul id="e3273e29-c837-4780-911b-5e2f17411445" class="bulleted-list"><li style="list-style-type:circle">.js</li></ul><ul id="1cc959e3-5d7c-4af2-943c-cb3316f58457" class="bulleted-list"><li style="list-style-type:circle">usw.</li></ul></li></ul><ul id="4eb5d7da-a046-4d24-90fb-f22975f32db8" class="bulleted-list"><li style="list-style-type:disc">Dateien sind meist strukturiert, also nebst den Daten des Bildes hat zum Beispiel ein .jpg auch Metadaten, damit der Computer weiss, wie die Daten zu lesen und präsentieren sind</li></ul><p id="21b3b77b-48b3-45d3-b3f1-d0f4e5f8384a" class="">
+</p><h2 id="c6bf0b78-4f40-4f31-87f4-1ddc7fedbc42" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Datenstruktur</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></h2><ul id="f1b6bfc1-1f94-4b73-b680-7650a122bb90" class="bulleted-list"><li style="list-style-type:disc">Strukturiert<ul id="039a14f0-0fb1-4f77-95a8-3bacb9b1a892" class="bulleted-list"><li style="list-style-type:circle">nur etwa 20% der Daten eines Unternehmens</li></ul><ul id="26f6946c-651d-4359-b31b-ae539eb04994" class="bulleted-list"><li style="list-style-type:circle">haben vorgegebens Format und können in Datenbanksystemen gespeichert werden</li></ul><ul id="78b0ee5d-3646-405d-8caa-5d44804ba4c7" class="bulleted-list"><li style="list-style-type:circle">in relationalen Datenbanken (mit welchen wir uns in diesem Modul befassen) werden Tabellen zur strukturierung gebraucht</li></ul><ul id="ef8d9f1f-094d-4dcd-b04b-c004b31a78fa" class="bulleted-list"><li style="list-style-type:circle">besteht aus Attributen (Spalten) und Datensätzen (Zeilen)</li></ul><ul id="577a6b28-6f15-48d1-b5a0-d47bd4637619" class="bulleted-list"><li style="list-style-type:circle">z.B.</li></ul><table id="fb0b0266-f80b-4fd1-ab07-1a7a316381f9" class="simple-table"><tbody><tr id="0684e190-6960-4f7a-8b8b-206c4067880b"><td id="oQXf" class="" style="width:167.50521850585938px"><strong>ID</strong></td><td id="eUMD" class="" style="width:167.50521850585938px"><strong>Name</strong></td><td id="hdTz" class="" style="width:167.50521850585938px"><strong>Vorname</strong></td><td id="RQ&gt;F" class="" style="width:167.50521850585938px"><strong>Alter</strong></td></tr><tr id="28b4222a-41df-4d76-bf7b-e3be08a3a8b7"><td id="oQXf" class="" style="width:167.50521850585938px">0</td><td id="eUMD" class="" style="width:167.50521850585938px">Aebi</td><td id="hdTz" class="" style="width:167.50521850585938px">Damian</td><td id="RQ&gt;F" class="" style="width:167.50521850585938px">24</td></tr><tr id="41aa230b-76ad-421d-b9ea-0d82f30e8fdd"><td id="oQXf" class="" style="width:167.50521850585938px">1</td><td id="eUMD" class="" style="width:167.50521850585938px">Huber</td><td id="hdTz" class="" style="width:167.50521850585938px">Martin</td><td id="RQ&gt;F" class="" style="width:167.50521850585938px">33</td></tr></tbody></table><p id="458bdba4-eeae-4b4c-8172-c9e7df96529c" class="">
+</p></li></ul><ul id="290770a6-37c8-408a-9de0-e69c82b3cea7" class="bulleted-list"><li style="list-style-type:disc">Semi-Strukturiert<ul id="0fdd98eb-6601-4a70-98b3-1973b4d3f04d" class="bulleted-list"><li style="list-style-type:circle">XML</li></ul><ul id="6f0478c8-f293-4966-a0b1-42b085f87140" class="bulleted-list"><li style="list-style-type:circle">Word</li></ul><ul id="b8c01342-7c55-40fe-b46e-5299bcb53c65" class="bulleted-list"><li style="list-style-type:circle">Excel</li></ul><ul id="3e91aa69-757f-43dc-bd21-df3a9c51e9cf" class="bulleted-list"><li style="list-style-type:circle">Haben zwar eine gewisse Struktur, jedoch kann man diese nicht wirklich auswerten, ausser sie werden von Software intepretiert</li></ul></li></ul><ul id="215a2796-94af-4d45-a250-fd4d096ce7b6" class="bulleted-list"><li style="list-style-type:disc">Unstrukturiert<ul id="e571e5c1-4955-4859-875c-f686541216c9" class="bulleted-list"><li style="list-style-type:circle">Fotos, Videos, Grafiken, Audio</li></ul><ul id="5a498582-27b4-4089-bc27-f0e3031c9a76" class="bulleted-list"><li style="list-style-type:circle">keine identifizierbare Struktur</li></ul><ul id="bea20551-39ed-4ffc-a31a-ac442a4522d4" class="bulleted-list"><li style="list-style-type:circle">müssen mit speziellem Programm intepretiert werden (z.B. Photoshop, MoviePlayer)</li></ul></li></ul><p id="12a85e4b-2d5b-4d16-bb95-405250d2bf94" class="">
+</p><h3 id="dd0dbe18-064b-4d14-a75f-2eb8dff93ea0" class="">Redudanz</h3><ul id="56d94ecc-9592-4c09-894b-3d329fe1465f" class="bulleted-list"><li style="list-style-type:disc">Sind unerwünscht</li></ul><ul id="40c1dea8-3a70-41a8-9b1a-8822fecdbff8" class="bulleted-list"><li style="list-style-type:disc">Wenn Daten mehrmals vorkommen, jedoch auch weggelassen werden könnten</li></ul><ul id="41847dc9-ea03-4b2f-b32a-88c089b816c5" class="bulleted-list"><li style="list-style-type:disc">z.B. Viele Leute bestellen den gleichen Film, welcher immer das gleiche Genre hat. Dies müsste eigentlich nur einmal angegeben werden, wird aber mehrmals aufgeführt</li></ul><ul id="848f1a55-2749-4642-b9fa-72b907918f6c" class="bulleted-list"><li style="list-style-type:disc">Sie verbrauchen Speicherplatz, erschweren den Aufwand von Veränderungen und könen auch zu Mutationsanomalien führen (wenn nicht alle Daten an allen Stellen geändert werden)</li></ul><ul id="ea273608-b8c6-4c92-ae2d-424200656e21" class="bulleted-list"><li style="list-style-type:disc">Eine Datenbank ist redundanzfrei, wenn man alle doppelten Informationen ohne Datenverlust entfernen kann</li></ul><ul id="f3ccff2e-125c-40a6-8403-aff9f2c6fed4" class="bulleted-list"><li style="list-style-type:disc">Jedoch kann man auch zu weit gehen um Redundanzen zu vermeiden. Z.B. nur weil zwei Personen dieselbe Addresse haben, muss man nicht eine separate Address-Tabelle führen. <ul id="d1ab6e70-1a2f-49dc-9a4c-e902e975633a" class="bulleted-list"><li style="list-style-type:circle">Es kann also Gründe geben, bewusst Redundanzen zuzulassen (Weniger Segmentierung bedeuted einfacheres Bearbeiten und Einsehen von Daten und bessere Performance)  </li></ul></li></ul><p id="5590c8b7-4566-4ad5-99bf-9bf2f4fdbaef" class="">
+</p><h3 id="193f108c-1e03-4985-aa2e-408c83664c3d" class="">Inkonsistenz (Anomalien)</h3><ul id="ab1eb15c-a170-4fb0-9ca8-eee30b0d2368" class="bulleted-list"><li style="list-style-type:disc">Z.B. zwei identische einträge, jedoch unterschiedliche Daten, (vielleicht unterschiedliche Preise)</li></ul><ul id="11541a6b-ad5b-4c0f-9564-eb5291514e2d" class="bulleted-list"><li style="list-style-type:disc">Kann bei verknüpfung von Datensätzen zu fehlenden Links führen</li></ul><ul id="05e80180-307f-49aa-b404-b80a19670f5b" class="bulleted-list"><li style="list-style-type:disc">Wenn die Daten frei von Wiedersprüchen sind, sind sie <strong>konsistent</strong><ul id="abd2ef07-bf4e-45af-9d99-0a1de13a362e" class="bulleted-list"><li style="list-style-type:circle">anders gesagt, es hat keine Daten, welche identisch sein sollten, es aber nicht sind</li></ul></li></ul><ul id="fa971e23-9ea1-43a0-baa7-45d69a235d02" class="bulleted-list"><li style="list-style-type:disc">Es gibt zwei Definitionen von Inkonsistenz<ul id="d960a439-9f69-40ac-aca3-a570ef33bdca" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">Definition 1:</mark> Frei von Redundanzen</li></ul><ul id="a010cd01-0e79-48cb-9917-eaec439fafbf" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">Definition 2:</mark> Wiedersprüche von Daten innerhalb einer Datenbank, z.B. einmal wohnt Herr Müller hier und einmal dort. </li></ul></li></ul><p id="eef0dc12-d093-4802-a9d9-e5599279a297" class="">
+</p><h3 id="ea4c5e44-bec5-4723-8b01-bdb7287fbf61" class="">Nachteile von Excel</h3><ul id="3011a331-a8cb-4f95-8b44-ede9ee71952a" class="bulleted-list"><li style="list-style-type:disc">Unübersichtlich</li></ul><ul id="0e9cb63e-64fd-4ccd-b517-ae67b204ed32" class="bulleted-list"><li style="list-style-type:disc">Evt. manuelle korrektur bei mehreren Orten</li></ul><ul id="c9f4390e-da93-4954-ac8d-3438bcec8ca5" class="bulleted-list"><li style="list-style-type:disc">Formeln einbauen ist schwieriger</li></ul></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

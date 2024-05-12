@@ -1,0 +1,816 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Aufgaben Weihnachtsmarkt (11)</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="607dd33c-e98b-4862-a082-a5281b3b5c08" class="page sans"><header><h1 class="page-title">Aufgaben Weihnachtsmarkt (11)</h1><p class="page-description"></p></header><div class="page-body"><p id="9b410ade-3178-46ea-91c5-b23254e09e28" class="">
+</p><p id="2d793add-95d8-4750-be63-81386f0e9654" class="">Ziel dieses Auftrags war eine saubere, erweiterbare und Wartungsfreundliche Lösung für die Speicherung von Daten eines Weihnachtsmarktes.</p><p id="f128f739-1a93-4ccd-9856-0c7a33e47c41" class="">Die Vorgaben waren die Folgenden: </p><ul id="32df0d73-f159-463e-8b1c-e6f37abf04e6" class="bulleted-list"><li style="list-style-type:disc">ERD erstellen mit mindestens 6 Tabellen. </li></ul><ul id="a822a70e-536e-4f3c-a591-e7e5cbadfee1" class="bulleted-list"><li style="list-style-type:disc">Anschliessend mit PostgreSQL im pgadmin 4 die Tabellen erstellen </li></ul><ul id="82f54db1-88f3-4214-9b08-14663c51f5f8" class="bulleted-list"><li style="list-style-type:disc">Tabellen mit Mockdaten füllen</li></ul><ul id="ed60fcfd-8652-4e03-944e-a4a74b7fef5e" class="bulleted-list"><li style="list-style-type:disc">Queries mit diesen Mockdaten ausführen</li></ul><ul id="b3b0fc7e-ee67-4748-ae31-e640a4d806e9" class="bulleted-list"><li style="list-style-type:disc">Backup der Datenbank erstellen und wiederherstellen</li></ul><h2 id="418b101d-bb78-42a5-8e15-8149cf167780" class="">ERD</h2><figure id="392566dd-6b7f-4221-b9ba-88c163a78840" class="image"><a href="Aufgaben%20Weihnachtsmarkt%20(11)%20607dd33ce98b4862a082a5281b3b5c08/Untitled_Diagram.drawio.png"><img style="width:638px" src="Aufgaben%20Weihnachtsmarkt%20(11)%20607dd33ce98b4862a082a5281b3b5c08/Untitled_Diagram.drawio.png"/></a></figure><h2 id="3dcabc1f-f5ff-4e7c-921e-dc59c8f1cd11" class="">Kreieren der Datenbank</h2><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="4192aec0-8964-4056-b6fa-0e08478c5d82" class="code"><code class="language-SQL"># Kreieren der Datenbank:
+
+CREATE TABLE Orders (
+	OrderID INT, 
+	ProductID INT,
+	PRIMARY KEY (OrderID, ProductID)
+);
+
+CREATE TABLE Log (
+	LogID INT PRIMARY KEY,
+	LogText VARCHAR(255),
+	LogTimestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE Stand(
+	stand_id SERIAL PRIMARY KEY, 
+	location_id INT,
+	FOREIGN KEY(location_id)
+	REFERENCES Location(location_id)
+)
+
+INSERT INTO Stand VALUES(DEFAULT, 1)
+
+CREATE TABLE Salesman(
+	salesman_id SERIAL PRIMARY KEY,
+	last_name VARCHAR(200) NOT NULL,
+	first_name VARCHAR(200) NOT NULL,
+	birth_date DATE NOT NULL,
+	location_id INT NOT NULL,
+	FOREIGN KEY(location_id)
+	REFERENCES Location(location_id),
+	stand_id INT NOT NULL,
+	FOREIGN KEY(stand_id)
+	REFERENCES Stand(stand_id)
+)
+
+INSERT INTO salesman VALUES(DEFAULT, &#x27;Gerhard&#x27;, &#x27;Michel&#x27;, &#x27;1970-02-02&#x27;, 2, 1);
+
+CREATE TABLE Attraction(
+	attraction_id SERIAL PRIMARY KEY, 
+	attraction VARCHAR(200) NOT NULL,
+	price FLOAT NOT NULL,
+	category_id INT,
+	FOREIGN KEY(category_id)
+	REFERENCES Category(category_id),
+	location_id INT,
+	FOREIGN KEY(location_id)
+	REFERENCES Location(location_id)
+)
+
+CREATE TABLE Product(
+	product_id SERIAL PRIMARY KEY, 
+	name varchar(200) NOT NULL,
+	price float NOT NULL,
+	category_id INT,
+	FOREIGN KEY(category_id)
+	REFERENCES category(category_id)
+)
+
+INSERT INTO stand_product VALUES(1, 1);
+INSERT INTO stand_product VALUES(1, 2);
+INSERT INTO stand_product VALUES(1, 3);
+INSERT INTO stand_product VALUES(1, 4);
+INSERT INTO stand_product VALUES(2, 5);
+INSERT INTO stand_product VALUES(2, 6);
+INSERT INTO stand_product VALUES(2, 7);
+INSERT INTO stand_product VALUES(2, 8);
+INSERT INTO stand_product VALUES(3, 9);
+INSERT INTO stand_product VALUES(3, 10);
+INSERT INTO stand_product VALUES(3, 11);
+INSERT INTO stand_product VALUES(3, 12);
+INSERT INTO stand_product VALUES(3, 13);
+INSERT INTO stand_product VALUES(4, 1);
+INSERT INTO stand_product VALUES(4, 4);
+INSERT INTO stand_product VALUES(5, 4);
+INSERT INTO stand_product VALUES(5, 7);
+INSERT INTO stand_product VALUES(5, 3);
+INSERT INTO stand_product VALUES(6, 13);
+INSERT INTO stand_product VALUES(6, 11);
+
+INSERT INTO attraction VALUES(DEFAULT, &#x27;Karussell&#x27;, 4.95, 1, 14);
+INSERT INTO attraction VALUES(DEFAULT, &#x27;Weihnachtsmann&#x27;, 0.00, 1, 15);
+INSERT INTO attraction VALUES(DEFAULT, &#x27;Weihnachtsbaum&#x27;, 0.00, 4, 16);
+
+CREATE SEQUENCE test_id_seq MINVALUE 27;
+ALTER TABLE kanton ALTER kanton_id SET DEFAULT nextval(&#x27;test_id_seq&#x27;);
+ALTER SEQUENCE test_id_seq OWNED BY kanton.kanton_id;</code></pre><h2 id="defe0841-64cf-4a2d-9183-c634f93c0ee1" class="">Abfragen auf der Datenbank</h2><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="dabef2d8-cb50-43ce-a1e9-3014e0727475" class="code"><code class="language-SQL"># durchschnittspreis der Produkte pro Kategorie, simpel
+SELECT AVG(price) as average_price, category_id FROM product GROUP BY category_id;
+
+# komplexere Ausführung: 
+SELECT AVG(p.price) as average_price, c.category FROM product as P 
+INNER JOIN category as c
+ON p.category_id = c.category_id
+GROUP BY c.category_id
+ORDER BY average_price ASC;
+
+# Standbesitzer und deren Stand locations
+SELECT s.last_name, s.first_name, l.street, l.street_nr
+FROM salesman as s
+INNER JOIN stand as st
+ON s.stand_id = st.stand_id
+INNER JOIN location as l
+ON st.location_id = l.location_id
+
+# Stände mit Produkten
+SELECT l.street, l.street_nr, p.name, p.price
+FROM stand as s
+INNER JOIN stand_product as sp
+ON s.stand_id = sp.stand_id
+INNER JOIN product as p
+ON sp.product_id = p.product_id
+INNER JOIN location as l
+ON s.location_id = l.location_id
+ORDER BY l.street_nr ASC
+
+# Stände mit Produkten und Inhaber
+SELECT s.last_name, s.first_name, l.street, l.street_nr, p.name, p.price
+FROM salesman as s
+INNER JOIN stand as st
+ON s.stand_id = st.stand_id
+INNER JOIN stand_product as sp
+ON s.stand_id = sp.stand_id
+INNER JOIN product as p
+ON sp.product_id = p.product_id
+INNER JOIN location as l
+ON st.location_id = l.location_id
+
+# nur Getränke
+SELECT l.street, l.street_nr, p.name, p.price
+FROM stand as s
+INNER JOIN stand_product as sp
+ON s.stand_id = sp.stand_id
+INNER JOIN product as p
+ON sp.product_id = p.product_id
+INNER JOIN location as l
+ON s.location_id = l.location_id
+WHERE p.category_id = 3
+ORDER BY l.street_nr ASC</code></pre><h2 id="ac2c7ccd-d297-43c8-822e-8ac57183c45a" class="">Backup</h2><figure id="ea36373c-8efe-4d00-b5c8-1830bf8a30ca" class="image"><a href="Aufgaben%20Weihnachtsmarkt%20(11)%20607dd33ce98b4862a082a5281b3b5c08/Untitled.png"><img style="width:1277px" src="Aufgaben%20Weihnachtsmarkt%20(11)%20607dd33ce98b4862a082a5281b3b5c08/Untitled.png"/></a><figcaption>Fun fact: Um das Backup der Datenbank zu exportieren, musste zuerst der Path angegeben werden.</figcaption></figure><ul id="5c241f0b-abe6-49c2-8f12-f7847a3d9f59" class="bulleted-list"><li style="list-style-type:disc">Verändern des Paths (screenshot)</li></ul><ul id="cc3dbf7f-6e92-4233-b8b2-7c932faed4e5" class="bulleted-list"><li style="list-style-type:disc">Bei der Datenbank Rechtsklick → export</li></ul><ul id="422f43dc-c3f5-467a-9bee-3513471c61f9" class="bulleted-list"><li style="list-style-type:disc">neue Datenbank erstellen</li></ul><ul id="9894f6ef-a5a0-4ad7-9489-a435905e578f" class="bulleted-list"><li style="list-style-type:disc">Rechtsklick → wiederherstellen</li></ul><h2 id="5e70e710-2b7e-4770-a8e8-3aeed94f044e" class="">Reflexion</h2><p id="aa64678e-09f5-4290-948e-2b8d195d23b7" class="">Das erstellte Modell erlaubt es, neue Eintrage zu erstellen, welche frei von Redundanzen und Inkonsistenzen sind. </p><p id="85a07fc1-55ae-4770-bfcc-616c7e6dca39" class="">Diese Methode von Datenspeicherung ist effizient, stabil und einfach zu warten.  </p><p id="d19b34d1-3fb7-4369-ba53-5089f9ce1f3d" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

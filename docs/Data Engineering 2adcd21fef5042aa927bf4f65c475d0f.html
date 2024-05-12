@@ -1,0 +1,754 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Data Engineering</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+</style></head><body><article id="2adcd21f-ef50-42aa-927b-f4f65c475d0f" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🗃️</span></div><h1 class="page-title">Data Engineering</h1><p class="page-description"></p></header><div class="page-body"><p id="eede6f02-7881-47e3-be27-794e991d94a2" class="">Datenbanken sind feste Speicher für Informationen. Diese Informationen sind strukturierte Daten.</p><p id="0993eaa2-f35f-483d-8ac4-472a5ce7ca9b" class="">Sie werden normalerweise von einem DBMS (z.B. MySQL oder Postgress) verwaltet</p><p id="a3de5f53-949c-4d5d-a249-77b454180a9f" class="">
+</p><h3 id="5917032b-07a0-4698-9f7a-4a99bad54f57" class="">Beispiel Datenbank “user”</h3><table id="b99b662f-7236-4bb1-bb4b-9be166a8e2ed" class="simple-table"><tbody><tr id="d5358416-a761-47f3-a364-b6467f2b237d"><td id="rEl;" class="">ID</td><td id="J|Pc" class="">name</td><td id="}}Hk" class="">vorname</td><td id="Q&lt;}c" class="">geburtsdatum</td></tr><tr id="436abdcd-0d44-4250-9b49-ba17ff27697f"><td id="rEl;" class="">1</td><td id="J|Pc" class="">tomev</td><td id="}}Hk" class="">marjan</td><td id="Q&lt;}c" class="">…</td></tr><tr id="e127aaff-7934-46cd-aa7d-eeae84055079"><td id="rEl;" class="">2</td><td id="J|Pc" class="">röthlisberger</td><td id="}}Hk" class="">ben</td><td id="Q&lt;}c" class="">…</td></tr></tbody></table><ul id="f44e80f5-e97a-4011-a826-5103dc33898d" class="bulleted-list"><li style="list-style-type:disc">Zeile = Datensatz / Entität / Tupel</li></ul><ul id="973ff4c9-a818-4211-83b9-83d19ec9b5af" class="bulleted-list"><li style="list-style-type:disc">Spalte = Attribut</li></ul><ul id="2fd834d9-884d-4746-a2b3-4b0f0fa69dcc" class="bulleted-list"><li style="list-style-type:disc">Entitätsmenge = “user”, die ganze Tabelle<ul id="549f699f-4102-42dd-ba6f-0a63b5f72144" class="bulleted-list"><li style="list-style-type:circle">Achtung: Name der Entitätsmenge sollte stets im Singular geschrieben sein</li></ul></li></ul><ul id="2e5a71bb-4507-4b99-8a8a-8a4a3bf60aa9" class="bulleted-list"><li style="list-style-type:disc">Datentyp = Domäne</li></ul><ul id="a110345d-2de9-48e0-a8cf-660af594f7bc" class="bulleted-list"><li style="list-style-type:disc">Zelle = Attributwert</li></ul><p id="d10605f7-f12e-469c-b370-0c56cb7355c8" class="">
+</p><p id="42544ec2-2e96-4efb-b42c-b13c8cb28518" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Semistrukturierte Daten</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><p id="e03d63d7-a192-494a-8e2f-d59a61ddf1a5" class="">Daten wie z.B. Word-Files</p><h3 id="2728716c-59bd-4f85-8117-16af4110d132" class="">ORM (Object Relation Mapping)</h3><ul id="84e0b21b-ba48-4b02-844f-83a029a2f828" class="bulleted-list"><li style="list-style-type:disc">Sind ein Tool, welches gewisse Objekte / Ausschnitte einer Datenbank </li></ul><ul id="c7076f30-53a2-4b67-9c96-a7f433339003" class="bulleted-list"><li style="list-style-type:disc">Man muss nicht mehr ein SQL query brauchen damit</li></ul><ul id="9964040b-18c0-4c38-82aa-9a3d05cf8840" class="bulleted-list"><li style="list-style-type:disc">Kann SQL-Queries in Objekte umwandeln und umgekehrt, damit der Entwickler kein SQL brauchen muss</li></ul><h3 id="a15797c7-0d87-453e-b8df-adf46945478f" class="">NoSQL</h3><ul id="987bff14-3f65-44d5-8a1a-400a15a1107d" class="bulleted-list"><li style="list-style-type:disc">Nicht relational im vergleich zu SQL</li></ul><ul id="5ad3b290-bc02-4a3f-a946-e3b5063c4138" class="bulleted-list"><li style="list-style-type:disc">Kann schneller sein</li></ul><h3 id="727cf068-8d93-4edb-85d9-e52ed0873303" class="">Beziehungen (Kardinalitäten)</h3><figure id="ba6980f3-b0bc-4908-9e8e-4bf3a5f9168d" class="image"><a href="Data%20Engineering%202adcd21fef5042aa927bf4f65c475d0f/Untitled.png"><img style="width:949px" src="Data%20Engineering%202adcd21fef5042aa927bf4f65c475d0f/Untitled.png"/></a></figure><ul id="13df98af-3081-4c04-83fa-c2751ad5b317" class="bulleted-list"><li style="list-style-type:disc">m:m brauchen immer eine Zwischentabelle</li></ul><ul id="16c2424a-4eb1-40d0-9e1d-8213ddca2664" class="bulleted-list"><li style="list-style-type:disc">ERD = logisches Datenmodell</li></ul><ul id="9096ba2d-7fb1-463c-b8c9-780ac53eade6" class="bulleted-list"><li style="list-style-type:disc">Vereinfachtes ERD = ERD, welches wir bei der Gibb gelernt haben (selbes aber keine Zwischentabellen und Fremdschlüssel)</li></ul><ul id="9a95ca1a-64f5-42aa-9fa9-af8cd10506e0" class="bulleted-list"><li style="list-style-type:disc">ERM = konzepitonnelles Datenmodell<ul id="9dc6291f-f0d4-4c42-a546-2a87325c25e0" class="bulleted-list"><li style="list-style-type:circle">Entität = Rechteck, z.B. Song</li></ul><ul id="3a721dc7-a070-4bd9-af06-8d2730719c3f" class="bulleted-list"><li style="list-style-type:circle">Attribute = Kreis (z.B. Titel)</li></ul><ul id="45bc08ec-8b46-4895-9b96-f34dd869df26" class="bulleted-list"><li style="list-style-type:circle">Beziehung = Raute (z.B. “hat”) </li></ul><ul id="1254cf78-b9a9-43fa-9d3f-f1219ca02a74" class="bulleted-list"><li style="list-style-type:circle">Raute ist zwischen zwei Entitäten (z.B. zwischen Album und Song) verbunden mit einem Strich, wo wiederum die Beziehungen aufzählt</li></ul></li></ul><ul id="29dc7d0c-d7cd-4bd9-9ec3-84055c589598" class="bulleted-list"><li style="list-style-type:disc">Echte Datenbank = physisches Datenmodell</li></ul><h3 id="39fe63f9-7237-4ae9-8764-af0870b1b97d" class="">Datentypen</h3><ul id="ea08a251-0a43-4389-a429-bfb40a07d20f" class="bulleted-list"><li style="list-style-type:disc">char <ul id="ea93a882-418b-432f-927d-573bd13a8337" class="bulleted-list"><li style="list-style-type:circle">beliebige Anzahl Zeichen (nicht wie in C# ein char)</li></ul><ul id="37ca7cd7-0705-4ab0-a3cf-20a7c9d98eb7" class="bulleted-list"><li style="list-style-type:circle">braucht immer die Menge an Speicher, welche angegeben wurde</li></ul></li></ul><ul id="ebc16552-49dc-4346-a1f3-480300f3402f" class="bulleted-list"><li style="list-style-type:disc">varchar<ul id="59734e2b-2f3d-429b-9221-a65b2182fa41" class="bulleted-list"><li style="list-style-type:circle">beliebige Anzahl Zeichen</li></ul><ul id="c1eefb3d-b9f3-46a1-8c20-a74d63461c16" class="bulleted-list"><li style="list-style-type:circle">jedoch verwendet er nur den nötigen Speicher + ein Byte um festzuhalten, wieviel er bereits gepseichert hat</li></ul></li></ul><ul id="85cc2d4c-3e0c-4055-810c-b7a72315445f" class="bulleted-list"><li style="list-style-type:disc">blob<ul id="a09dce80-311b-4bd5-ab25-30177a8a41bd" class="bulleted-list"><li style="list-style-type:circle">Sammlung an Werten</li></ul><ul id="544d1f09-2fa1-4f46-87eb-4437d49fa084" class="bulleted-list"><li style="list-style-type:circle">können auch unstrukturierte Daten sein</li></ul><ul id="6f2dc9be-8842-439b-9585-aab99f3a93d7" class="bulleted-list"><li style="list-style-type:circle">braucht man jedoch praktisch gar nicht mehr, weil auch z.B. Bilder heutzutage auf einem separaten storage gespeichert werden und nur der Link zum Bild ist in der Datenbank</li></ul></li></ul><ul id="531cfb82-05c1-4446-8ffe-c66bfff2c509" class="bulleted-list"><li style="list-style-type:disc">boolean</li></ul><ul id="5f30cccc-d201-4ca1-8fce-73eced6ff00c" class="bulleted-list"><li style="list-style-type:disc">integer</li></ul><ul id="f750e173-92ce-45d4-bd41-0e4ce1a55640" class="bulleted-list"><li style="list-style-type:disc">float</li></ul><ul id="8f5f2bbd-aae6-4f55-9d25-1e5102cbe9e1" class="bulleted-list"><li style="list-style-type:disc">datetime</li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="4a519eed-2a65-4c06-a857-48594647f639" class="code"><code class="language-Bash">INT / INTEGER	Ganze Zahlen, +/- zwei Milliarden (genauer von -2147483648 bis 2147483647)
+DOUBLE	Zahlen mit Kommastellen, Achtung ((10 / 3) * 3) != 10
+DECIMAL	Kommastellenzahlen für höhere Präzision (Beispielsweise Geld oder Devisen)
+CHAR	Zahlen und Buchstaben, fixer Speicherbedarf, Länge 0 bis 255 Zeichen
+VARCHAR	Zahlen und Buchstaben, variabler Speicherbedarf, Länge 0 bis 65535 Zeichen
+TEXT	Zahlen und Buchstaben bei grösseren Texten, analog wie BLOB
+TIME	Zeit,	Format:	HH:MI:SS
+DATE	Datum,	Format:	YYYY-MM-DD (01.01.1000 – 31.12.9999)
+DATETIME	Datum-Zeit, 	Format:	YYYY-MM-DD HH:MI:SS (01.01.1000 – 31.12.9999)
+TIMESTAMP	Zeitpunkt, 	Format:	YYYY-MM-DD HH:MI:SS (01.01.1970 – 19.01.2038)
+BLOB	Binary Large Object, binäre Daten (EXE-Files, Bilder, Videos etc.)</code></pre><h3 id="430f55bf-086a-4f98-b19d-1d033c6438bf" class="">Constraints</h3><table id="0b890ba3-7282-45d0-a453-10bec3e02a98" class="simple-table"><tbody><tr id="1b9b2aa6-f189-401a-a950-4fbd32415156"><td id="hos~" class="" style="width:256.9930725097656px">Constraint</td><td id="{Iz[" class="" style="width:437.9930725097656px">Beschreibung</td></tr><tr id="e0065875-6308-4335-adce-1749003157ca"><td id="hos~" class="" style="width:256.9930725097656px">Größe</td><td id="{Iz[" class="" style="width:437.9930725097656px">Bei bestimmten Datentypen kann die maximale Größe definiert werden.</td></tr><tr id="981bdcd2-aac2-4362-a8bf-83caa2f06c2d"><td id="hos~" class="" style="width:256.9930725097656px">Vorname VARCHAR(50)</td><td id="{Iz[" class="" style="width:437.9930725097656px">Nur Vornamen mit maximal 50 Zeichen.</td></tr><tr id="d11a67ff-c08a-403e-8356-449cd729dbad"><td id="hos~" class="" style="width:256.9930725097656px">Primary Key</td><td id="{Iz[" class="" style="width:437.9930725097656px">Wenn ein Attribut ein PK ist, gilt es als eindeutiger Verknüpfungswert.</td></tr><tr id="f93a6bb4-1922-41e2-838d-19aada50f99e"><td id="hos~" class="" style="width:256.9930725097656px">Foreign Key</td><td id="{Iz[" class="" style="width:437.9930725097656px">Wenn ein Attribut ein FK ist, hat es eine Verbindung zu einem PK.</td></tr><tr id="46cbcb0f-b1a6-4b64-81c1-670da7702c39"><td id="hos~" class="" style="width:256.9930725097656px">Not Null</td><td id="{Iz[" class="" style="width:437.9930725097656px">In diesem Attribut darf nichts leer sein.</td></tr><tr id="5d334242-ff2d-4719-9594-1242f920a549"><td id="hos~" class="" style="width:256.9930725097656px">Vorname VARCHAR(50) NOT NULL</td><td id="{Iz[" class="" style="width:437.9930725097656px">Der Vorname muss angegeben werden.</td></tr><tr id="a854a9e0-c1b9-423f-ae2a-8b7d25cb44c6"><td id="hos~" class="" style="width:256.9930725097656px">Unique</td><td id="{Iz[" class="" style="width:437.9930725097656px">Werte mit einem Unique-Attribut müssen eindeutig sein.</td></tr><tr id="a36fdf06-e219-474d-9b50-57c72b69e5dc"><td id="hos~" class="" style="width:256.9930725097656px">Email VARCHAR(100) UNIQUE</td><td id="{Iz[" class="" style="width:437.9930725097656px">Eine E-Mail darf nicht doppelt verwendet werden.</td></tr><tr id="814639f2-d028-4ab7-beee-86068c05def1"><td id="hos~" class="" style="width:256.9930725097656px">Default</td><td id="{Iz[" class="" style="width:437.9930725097656px">Wenn nichts spezifiziert wurde, gilt ein Standardwert.</td></tr><tr id="2e8d29db-c69e-4bb6-ae3a-5aecf9e7a6fd"><td id="hos~" class="" style="width:256.9930725097656px">INT Lieblingsverein DEFAULT 1</td><td id="{Iz[" class="" style="width:437.9930725097656px">Hinter 1 könnte beispielsweise GCZ stehen.</td></tr><tr id="63990879-a575-4954-a3d6-7c9ead541ec6"><td id="hos~" class="" style="width:256.9930725097656px">Auto Increment</td><td id="{Iz[" class="" style="width:437.9930725097656px">Diese Variable wird automatisch hochgezählt. In der Regel in Verbindung mit einem PK. INT ID PrimaryKey Auto_Increment.</td></tr></tbody></table><ul id="33364e77-da0b-4e9a-b08f-52d39e3a598e" class="bulleted-list"><li style="list-style-type:disc">Darf ein Attribut leer sein? = Null</li></ul><ul id="3017eb9f-6582-46d9-98f5-1c7f0e63f573" class="bulleted-list"><li style="list-style-type:disc">Ein wert muss einzigartig sein = Unique</li></ul><ul id="4493b585-6f38-4683-b610-4c59d4031110" class="bulleted-list"><li style="list-style-type:disc">Wie hoch darf ein int sein bei einem Attribut? = Check</li></ul><ul id="7d34361e-9233-4c6f-a6aa-6ab21314ad9a" class="bulleted-list"><li style="list-style-type:disc">Primary key = Muss vorhanden und Unique sein</li></ul><h3 id="85cca0b7-7fb8-47b6-aec9-524b928ea2ae" class="">Wichtigkeit der Planung</h3><p id="fcd628fd-3ea0-40a6-a343-67c4f616ef92" class="">Es ist generell wichtig, dass von Anfang an die Attribute die richtigen Datentypen  &amp; constraints haben, da es immer aufwändiger ist, etwas im Nachhinein zu ändern, als wenn es von Anfang an richtig ist. Hier sind auch zwei Fehler die häufig gemacht werden:</p><ul id="36c6f5ba-b161-4f98-a0b0-e4e1759b20ec" class="bulleted-list"><li style="list-style-type:disc">Postleitzzahlen sollten als varchar gespeichert werden</li></ul><ul id="c56cbdb5-4ebe-4d8c-af6e-8dc742050119" class="bulleted-list"><li style="list-style-type:disc">Telefonnummern sollten auch als varchar gespeichert werden</li></ul><h3 id="8da58455-adfb-4a13-92fb-3eec4ca18ea9" class="">Referentielle Integritätsbedingungen</h3><p id="fce268f6-2be5-4517-94d6-612925d6473b" class="">Sind Bedingungen, die definiert werden, um die Integrität sicherzustellen.</p><ul id="cfa52ea0-8c17-46ce-b40d-d13673a1d3b8" class="bulleted-list"><li style="list-style-type:disc">z.B., was passiert, wenn eine Entität gelöscht wird, auf welches ein Fremdschlüssel verwies</li></ul><ul id="c3ccc13a-74c2-46b5-9146-b990b66f3b6f" class="bulleted-list"><li style="list-style-type:disc">Cascade = Alles, was referenziert hat, wird gelöscht oder überarbeitet</li></ul><ul id="855f6ded-d4f3-4c53-b1bf-be495a170122" class="bulleted-list"><li style="list-style-type:disc">Set Null = Der Fremdschlüssel wird mit NULL ersetzt</li></ul><ul id="bd58c222-ba08-4623-8939-0216afcbf652" class="bulleted-list"><li style="list-style-type:disc">Restrict / No Action = Es ist nicht möglich eine Entität zu löschen, solange darauf referenziert wird</li></ul><h3 id="e44ae279-a1e9-46d2-a979-2437aa46fa14" class="">Natürlicher Primärschlüssel vs Surrogate key</h3><ul id="ac6d28a9-3e09-42a0-9919-a4df362d315a" class="bulleted-list"><li style="list-style-type:disc">Natürlicher Primärschlüssel<ul id="837da748-b400-4a2a-a73a-20180899e921" class="bulleted-list"><li style="list-style-type:circle">z.B. eine AHV Nummer kommt in der Natur vor und ist bereits ein einzigartiger Wert, kann also als Primärschlüssel verwendet werden</li></ul><ul id="19cb8946-3b37-41f8-8682-5ccafaebbab1" class="bulleted-list"><li style="list-style-type:circle">Sollte <strong><strong><strong><strong><strong><strong><strong>niemals</strong></strong></strong></strong></strong></strong></strong> verwendet werden, weil es immer ein Risiko gibt, dass dieser Schlüssel sich ändert.</li></ul></li></ul><ul id="6fa6f3ec-f343-4e11-b99b-ce207313d176" class="bulleted-list"><li style="list-style-type:disc">Surrogate key<ul id="f443902b-3bf2-401a-a511-e61c5ea0543d" class="bulleted-list"><li style="list-style-type:circle">Ist alles, was kein natürlicher Primärschlüssel ist, also z.B. 0, 1, 2 </li></ul></li></ul><h3 id="baab17e6-c9ff-4cdd-bfca-997424d62c9f" class="">Performance Scaling</h3><ul id="5f404e1d-404b-4e31-ac18-36830d1fb6c5" class="bulleted-list"><li style="list-style-type:disc">Vertical scaling<ul id="5790e539-391d-431d-a013-55e4a98dbfd8" class="bulleted-list"><li style="list-style-type:circle">Verbesserung der Maschine (mehr RAM, mehr CPU, mehr Speicher etc.)</li></ul></li></ul><ul id="d6e9ec60-402a-4684-9e34-6a4da94270d5" class="bulleted-list"><li style="list-style-type:disc">Horizontal scaling<ul id="7eef136f-f4cf-4de1-9fb5-e4502c3d4261" class="bulleted-list"><li style="list-style-type:circle">Neue Maschinen hinzufügen, anstatt eine Maschine zu verbessern</li></ul><p id="c5ddf06c-afec-4daa-8a85-c16448035289" class="">
+</p></li></ul><p id="3d07172e-ab21-4cef-b1ed-6d6d30dfb87d" class="">Wenn man dynamisch horizontal skaliert nennt man es “Load-Balancing”</p><ul id="c87386fa-246a-405a-889b-c64b45d7c678" class="bulleted-list"><li style="list-style-type:disc">Der Load-Balancer bekommt die Anfragen der Nutzer und entscheidet, auf welche Maschine zugegriffen werden muss</li></ul><ul id="a24a7d51-dad9-4db7-a7ee-9dabc7132143" class="bulleted-list"><li style="list-style-type:disc">Die Maschinen hingegen greifen dann wieder auf die selbe Datenbank zu, was wiederum zu Überlastung der Datenbank führen kann</li></ul><ul id="72e8e022-880f-4b00-a704-1bcbdc7db89b" class="bulleted-list"><li style="list-style-type:disc">Man kann dies optimieren, indem man mehrere synchronisierte Datenbanken hat, welche parallel abgerufen werden können</li></ul><ul id="3326300c-aadf-41e7-b71b-2ccd4dac9c05" class="bulleted-list"><li style="list-style-type:disc">Oft wird um die Synchronisierung zu verhindern ein vertikales Scaling für Datenbanken verwendet</li></ul><ul id="bf72a489-3712-4ef0-8d0a-1d790613c335" class="bulleted-list"><li style="list-style-type:disc">Jedoch für die Backend Maschinen braucht man horizontales scaling. Je nach Anzahl aktive user können automatisch und agil mehr Maschinen aufgeschaltet werden<p id="2076e101-0757-4049-882a-5a16b935c789" class="">
+</p></li></ul><p id="b0ce4ccd-2b9e-4e3e-af57-895478535b96" class="">Es brauch nicht unbedingt eine Maschine zwischen User und Server (Monolyt), also Frontend und Backend sind auf derselben Maschine</p><p id="5d8f46d7-9fb8-498d-a2bf-da6484546299" class="">Jedoch ist die Datensicherheit nicht mehr so gut. Ausserdem kann man danach nicht mehr mehrere Frontends mit demselben Backend hat</p><h3 id="ab78eeff-075f-46f6-99fa-c90152226177" class="">Aufgabe</h3><ul id="51ff0f63-4d1a-4876-8b4b-20c4c21bf29f" class="bulleted-list"><li style="list-style-type:disc">je 6-8 Tabellen</li></ul><ul id="9b35b842-a91b-4406-b86b-5fddfa01148b" class="bulleted-list"><li style="list-style-type:disc">Thema definieren</li></ul><ul id="6f17cb43-a23d-4eae-98cf-a2865022d6a1" class="bulleted-list"><li style="list-style-type:disc">ERD und ERM machen</li></ul><h3 id="b3831ea1-96fd-40fc-8b92-4b77f734a023" class="">DBMS</h3><p id="fb2a260e-c18e-485c-ac76-778c0873a970" class="">Schnittstelle zwischen Datenbank und Applikation. </p><p id="c4edee9e-25ed-4181-8234-65f160829eb6" class="">Z.B. PostgreSQL, SQLite, MySQL</p><p id="e041b7ed-6145-4e8d-940c-1aa8b7012b9e" class="">Clarification: Eine Datenbank kann mehrere Tables haben. Ein DBMS kann mehrere Datenbanken haben.</p><h3 id="5d871343-1c8f-4228-b8ee-69440749378e" class="">SQL Befehle</h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="4bf49a8e-71e3-4730-9198-d244d0c60ccb" class="code"><code class="language-SQL">create user marketman with password &#x27;marketpw&#x27;;
+\du # -&gt; user shows up
+create database market with owner marketman;
+\l # -&gt; table shows up with owner marketman
+\c [database] # -&gt; mit datenbank verbinden
+\dt # -&gt; show tables
+
+
+# kreiert Tabelle
+CREATE TABLE Location(
+	location_id SERIAL PRIMARY KEY,
+	street VARCHAR(200) NOT NULL,
+	street_nr INT,
+	postal_code INT NOT NULL,
+	location_name VARCHAR(200) NOT NULL
+)
+
+# Einträge in die Tabelle einfügen
+INSERT INTO Location VALUES(DEFAULT, &#x27;Gerhardsweg&#x27;, 12, 3600, &#x27;Hilterfingen&#x27;); # fügt Zeile ein
+INSERT INTO Location(street, street_nr, postal_code, location) Values (&quot;..&quot;, 9, 9292, &quot;...&quot;) # explizites definieren der zu füllenden Spalten
+INSERT INTO Person (Vorname, Nachname, Email)
+VALUES
+(&#x27;Adrian&#x27;,&#x27;Krebs&#x27;,&#x27;adrian.krebs@tie.com&#x27;),
+(&#x27;Barbara&#x27;,&#x27;Surber&#x27;,&#x27;barbara.surber@tie.com&#x27;),
+(&#x27;Robin&#x27;,&#x27;Röösli&#x27;,&#x27;robin.roeoesli@tie.com&#x27;)
+;
+
+# Einträge ändern / löschen
+UPDATE customer SET email = &#x27;LAURAR@skailacustomer.org&#x27; WHERE customer_id = 22;
+DELETE FROM payment WHERE payment_id BETWEEN 30 AND 36;
+		# ^ hier ist kein * Zeichen. Es ist bei &quot;DELETE&quot; nicht erlaubt
+
+# Von einem other_table Einträge machen
+INSERT INTO new_table (x,y,z)
+SELECT x, y, z
+FROM other_table
+WHERE xzxzy
+
+
+
+# Table mit zwei Foreign Keys als Primary Key:
+CREATE TABLE stand_product(
+	stand_id INT NOT NULL,
+	product_id INT NOT NULL,
+	FOREIGN KEY (stand_id) REFERENCES stand(stand_id),
+	FOREIGN KEY (product_id) REFERENCES product(product_id),
+	PRIMARY KEY(stand_id, product_id)
+)
+
+# Add attribute to table
+ALTER TABLE product ADD name VARCHAR(200) NOT NULL;
+# Foreign key restriction eines Tables löschen
+ALTER TABLE payment DROP FOREIGN KEY fk_rental_customer;
+
+# Show SQL code of table
+SHOW CREATE TABLE &lt;table&gt;;
+SHOW CREATE TABLE example;</code></pre><p id="f6539be0-79b2-4862-b3e5-3089bf2da776" class="">
+</p><h3 id="c8927889-47c7-4f0b-aaf7-2003c27ec492" class="">Performance</h3><p id="ca74b64b-77fb-477a-bd8e-29907293f3b5" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Indexierung</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><p id="46c84d00-3bec-4fcc-94df-7754ba574078" class="">Verschnellern das Abrufen von Werten, indem Attributen einen Index enthalten und dazu ein Binärbaum gebaut wird. Die Abfrage ist nun schneller, jedoch ist das Löschen und verändern der Werte langsamer.</p><p id="61d0049e-480b-49fa-9a2a-84bc68b31139" class="">Wenn die Datenbank viele Einträge hat, kann man indexieren. <br/>Wie Register in einer Datenbank mit Pointern zu werten. Damit können schnellere Suchalgorithmen gemacht werden. <br/></p><p id="f28207c7-791d-4093-9986-1508208380f2" class="">Theoretisch macht es kein Sinn, wenn die Daten schon sortiert sind. Es macht auch kein Sinn, wenn man nur wenig Daten hat. </p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="729358b3-e2bd-4032-a472-0071faf0b064" class="code"><code class="language-SQL">CREATE INDEX idx_email ON Benutzer (Email);
+# Index ist gesetzt. Wenn man nun einen SELECT-Befehl auf &quot;Email&quot; macht,
+# ist es, je nach grösse der DB, massiv schneller.
+
+# (Der SELECT Befehl muss nicht den Index ansprechen, der Index wird automatisch verwendet,
+# wenn es auf diesem Attribut einen gibt)</code></pre><p id="9419d2e1-43a9-4073-bab6-68a6235f5edc" class="">Es gibt auch Unique Indexe. Das bedeutet, dass z.B. in der indexierten Vornamen Tabelle nicht zweimal ein selber Vorname vorkommen darf.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="fb422e8c-4ddd-4325-b52b-e387daf07db5" class="code"><code class="language-SQL">CREATE UNIQUE INDEX kundenid_indx ON kunden (KundenID);</code></pre><p id="b40833ff-d453-4fbc-8468-fcd38f2bb86e" class="">Es gibt auch zweispaltige Indexe. Diese sind so sortiert, dass wenn die erste Spalte Duplikate enthält, dass danach nach der zweiten Spalte sortiert. </p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="cf470a3c-d0e8-4bba-85da-07415c22b952" class="code"><code class="language-SQL">CREATE INDEX joined_index ON bestellpositionen (BestellID, ProduktID);</code></pre><p id="b295aab7-212b-403d-a6ac-0248ebfcb64c" class="">Man kann auch einen Volltext indexieren, um schnell ein Wort im text zu finden.</p><p id="26ee47fb-a717-4a7f-bffe-51934b13983f" class="">
+</p><figure id="607dd33c-e98b-4862-a082-a5281b3b5c08" class="link-to-page"><a href="Data%20Engineering%202adcd21fef5042aa927bf4f65c475d0f/Aufgaben%20Weihnachtsmarkt%20(11)%20607dd33ce98b4862a082a5281b3b5c08.html">Aufgaben Weihnachtsmarkt (11)</a></figure></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

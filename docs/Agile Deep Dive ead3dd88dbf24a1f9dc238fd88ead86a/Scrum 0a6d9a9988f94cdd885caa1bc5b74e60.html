@@ -1,0 +1,680 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Scrum</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="0a6d9a99-88f9-4cdd-885c-aa1bc5b74e60" class="page sans"><header><h1 class="page-title">Scrum</h1><p class="page-description"></p></header><div class="page-body"><ul id="b3680b9c-adf9-4a9e-9c11-5bde5e0ed64d" class="bulleted-list"><li style="list-style-type:disc">Kanban ist ein Arbeitsform</li></ul><ul id="145fa048-84d8-4430-8bae-74e623156b7c" class="bulleted-list"><li style="list-style-type:disc">Scrum ist eine Projektmethode</li></ul><ul id="9024a2a2-0124-428d-a1d7-923cd1f5d48b" class="bulleted-list"><li style="list-style-type:disc">Scrum kann mit Kanban kombiniert werden</li></ul><h3 id="631ba169-c933-4bea-b622-b9baf40f86d8" class="">Rollen</h3><ul id="d03a737d-ac5c-43db-b9f4-cdcf10b770b2" class="bulleted-list"><li style="list-style-type:disc">Scrum Master<ul id="d7778dde-d11f-439b-85d6-141572492e10" class="bulleted-list"><li style="list-style-type:circle">Fördert Zusammenarbeit und löst Barrieren mit Stakeholdern</li></ul><ul id="c5c2cef9-8c79-4735-ab28-564f8ee7bf6b" class="bulleted-list"><li style="list-style-type:circle">Beseitigung von Hindernissen im Scrum-Projekt</li></ul></li></ul><ul id="25889063-ddc2-49cf-a5bd-1a51ee16788a" class="bulleted-list"><li style="list-style-type:disc">PO (Product Owner), verantwortet die Entwicklung<ul id="4e8794b8-2c03-4be6-ae72-eee7522787ea" class="bulleted-list"><li style="list-style-type:circle">Produktziel entwickeln und kommunizieren</li></ul><ul id="7b78de46-7aa1-41ac-82a0-5a42e8ca06d4" class="bulleted-list"><li style="list-style-type:circle">Reihenfolge der Product-Backlog-Einträge festlegen</li></ul><ul id="3a7c5c27-d745-4b21-b3a6-fb2d56cfa734" class="bulleted-list"><li style="list-style-type:circle">PO ist Visionär im Team, er / sie legt fest, welche Ziele priorisiert werden</li></ul></li></ul><ul id="d4c19947-f803-41ff-a7d5-5c9db2bd5e32" class="bulleted-list"><li style="list-style-type:disc">Entwickler/in , alle anderen Rollen, welche am Inkrement beteiligt sind (egal was sie machen)<ul id="8e23f95c-a591-4623-889a-d4f88cd596b3" class="bulleted-list"><li style="list-style-type:circle">einen Plan für den Sprint erstellen (Sprint backlog)</li></ul><ul id="62d9836e-0854-442a-b8e1-7d6e76b16b16" class="bulleted-list"><li style="list-style-type:circle">Entwickler sind die Personen mit dem Know how, sie Entscheiden wie die Zeile erreicht werden</li></ul><ul id="3f034b04-936b-40ab-a545-a77b453ea453" class="bulleted-list"><li style="list-style-type:circle">Expertenrolle</li></ul></li></ul><h3 id="f8473336-4b16-4dd5-9e6f-57c43c3cf309" class="">Events</h3><ul id="5de42abb-26f5-49d0-bf8d-f3c8c2eb75ef" class="bulleted-list"><li style="list-style-type:disc">Planning am Anfang<ul id="b8da4317-ac88-418e-b7f9-dbc982ca6922" class="bulleted-list"><li style="list-style-type:circle">Wer nimmt Teil am Sprint</li></ul><ul id="cc87b351-3f1e-44e0-9e56-9a56d06d5c05" class="bulleted-list"><li style="list-style-type:circle">Wieviel können wir machen (Storypoints ETA)</li></ul><ul id="5ea102f9-9b12-471c-8252-e9fe9abbf7e1" class="bulleted-list"><li style="list-style-type:circle">max 8h für ein Monat</li></ul></li></ul><ul id="61df69fe-1e13-47d8-84e4-88b42c5fd8b4" class="bulleted-list"><li style="list-style-type:disc">Täglich ein daily<ul id="773ba76b-b045-4709-8175-03bb87d0a053" class="bulleted-list"><li style="list-style-type:circle">Im daily muss der PO muss nicht dabei sein</li></ul></li></ul><ul id="fe2f09cf-6c3e-4cff-9c3c-598fa7bb8d8e" class="bulleted-list"><li style="list-style-type:disc">Am Ende des Sprints kommt die Review<ul id="1b7c4c87-36c0-4c76-9b93-2bcbe2bd35b6" class="bulleted-list"><li style="list-style-type:circle">Einziger Termin, wo Steakholder dabei sein können</li></ul><ul id="959b481c-e1a5-4548-b9f5-e07ac7413914" class="bulleted-list"><li style="list-style-type:circle">max 4h</li></ul></li></ul><ul id="825a51b4-23d3-4c47-82e9-b4a63b64f7e3" class="bulleted-list"><li style="list-style-type:disc">Retro schliesst den Sprint ab<ul id="e52c8f2f-dc9f-4f1d-a03b-f8f3dafd528e" class="bulleted-list"><li style="list-style-type:circle">Hier sieht man zurück auf den Sprint und definiert was gut war und was nicht so gut war</li></ul><ul id="35d3093f-b83c-41a9-be9d-c0136616cf87" class="bulleted-list"><li style="list-style-type:circle">Vor allem definiert man, was man im nächsten Sprint besser machen kann</li></ul></li></ul><p id="00df4ef6-f125-4abc-830d-2edfcb9128bf" class="">
+</p><h3 id="2c999fa3-2329-4c15-a958-77b76841161d" class="">Artefact</h3><p id="717df5a6-7a80-40cc-a29f-dfaab5318b21" class="">Repräsentieren Arbeiten</p><ul id="25baeddf-4cef-4357-85ce-269c44c5fa93" class="bulleted-list"><li style="list-style-type:disc">Sprint Goal<ul id="b1a53969-4872-4286-9ca4-edca0c60ac3b" class="bulleted-list"><li style="list-style-type:circle">Am Ende des Sprint-Planning sind alle committed, dass Sprint-Goal zu erreichen</li></ul><ul id="fd251b78-0e8f-4792-bbef-5bf41aa1f90e" class="bulleted-list"><li style="list-style-type:circle">Wird mit der “Definition of Done” überprüft</li></ul></li></ul><ul id="aa120e23-e0fb-44d0-b7cd-e1137e9fdb54" class="bulleted-list"><li style="list-style-type:disc">Product Goal<ul id="74463636-8863-4c76-a85a-e6ab1d3a30ec" class="bulleted-list"><li style="list-style-type:circle">Auch hier wird ein Goal definiert</li></ul><ul id="f9eb7f17-2eb4-4f85-9676-fca5b8d4df08" class="bulleted-list"><li style="list-style-type:circle">Auch hier hat es eine “Definition of Done”</li></ul></li></ul><ul id="f7f525a1-3158-47ec-9924-fefc3610f967" class="bulleted-list"><li style="list-style-type:disc">Definition of Done</li></ul><h3 id="5e442978-3c27-4a26-ad89-c9fc298f95ab" class="">Sprint</h3><ul id="ecdb07f7-4938-40f4-b3a7-739d2e159ff4" class="bulleted-list"><li style="list-style-type:disc">Sprints sind in der Regel 2-4 Wochen lang, haben aber keine definierte Dauer</li></ul><ul id="2c0a2563-fa42-482e-9e8a-6514745d8d3b" class="bulleted-list"><li style="list-style-type:disc">Ein Sprint besteht aus<ul id="ac7d17dc-656a-4e94-a65d-73389d3b653a" class="bulleted-list"><li style="list-style-type:circle">Daily</li></ul><ul id="a6a4dec5-0a54-44d2-b455-d6d6e68d7d12" class="bulleted-list"><li style="list-style-type:circle">Review</li></ul><ul id="f9541b2a-da42-40ca-8e1d-d5462570e5bb" class="bulleted-list"><li style="list-style-type:circle">Retro</li></ul></li></ul><ul id="86dd8fc8-12ca-4891-a3c9-95b3b9402089" class="bulleted-list"><li style="list-style-type:disc">Retro und Planning können als die wichtigsten Events angesehen werden, da im Retro definiert wird, wie man sich Verbessern kann und im Planning können diese Verbesserungen umgesetzt werden</li></ul><p id="aa0e22c6-ac2c-4466-9ffc-6ca40d8a921e" class="">
+</p><ul id="1474aaea-850d-47ab-b3dd-5e1bfda63c7d" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">Die wichtigsten Punkte von Scrum sind </mark><ul id="71cf3a7b-7a1c-4752-8b8d-967265eb7dd2" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">Die Product Owner:in und ihre Vision muss respektiert werden. Es darf nicht vom Entwickler-Team in ihre Ideen oder Priorisierung eingepfuscht werden</mark></li></ul><ul id="32942aa0-83b1-4b03-8f70-1bebebd9e09b" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">Jedoch muss die Idee des PO auch gut sein, da alles darauf aufbaut</mark></li></ul><p id="4bbbd5ee-b5da-4c45-a8ff-791e3f7caa7f" class="">
+</p></li></ul></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

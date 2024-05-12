@@ -1,0 +1,737 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>8 - SELECT mit JOIN</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="9f3acbaa-fdc7-4542-a213-4c79d48fae56" class="page sans"><header><h1 class="page-title">8 - SELECT mit JOIN</h1><p class="page-description"></p></header><div class="page-body"><p id="d3278433-2b68-40cb-be80-cbc3ba9a0fab" class=""><code>SELECT</code></p><p id="5d3cb1f8-f742-4991-aa03-374ab49c0c25" class=""><code>&lt;Spaltenliste&gt;</code></p><p id="e7b1f6d2-4f90-43e2-bae0-3719a5488370" class=""><code>FROM &lt;linke Tabelle&gt; AS &lt;Alias&gt;</code></p><p id="2aa0b990-5b23-4e1d-a986-27492d91502a" class=""><code>[ &lt;Join-Typ&gt; ] JOIN &lt;rechte Tabelle&gt; AS &lt;Alias&gt;</code></p><p id="db322b79-99d7-4cfa-8001-86611f1c0a13" class=""><code>ON &lt;Bedingung&gt;</code></p><p id="1e61b7c5-327e-463a-9489-8a8b1f126ad6" class=""><code>WHERE...;</code></p><p id="712f423d-bf7b-420d-814e-4ccb966279f7" class="">
+</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="f4c145a9-d7a5-48d0-b134-edddd79d4ce8" class="code"><code class="language-SQL">SELECT *
+  FROM Lernende AS l
+  INNER |LEFT | RIGHT JOIN Orte AS o
+  ON l.ort_id = o.id;</code></pre><p id="7c729d53-6423-4f5f-ac5c-fd58fc7b433f" class="">
+</p><ul id="0e44b986-a1e4-4e55-b7f1-0f4fae655149" class="bulleted-list"><li style="list-style-type:disc">AS definiert ein alias (soz. eine Variable) für die Auswahl und kann später im “ON” </li></ul><ul id="3c28fcfd-0af7-4c93-946c-43ee3c40e990" class="bulleted-list"><li style="list-style-type:disc">Join-Typ<ul id="56d88d61-40e4-4c21-9e9b-ab7cfa9e3e13" class="bulleted-list"><li style="list-style-type:circle">INNER</li></ul><ul id="95b6f35e-fd64-441f-95c4-90ddc4700bbc" class="bulleted-list"><li style="list-style-type:circle">LEFT</li></ul><ul id="cfa161e7-86d2-47b2-a9bf-d0524ea186b6" class="bulleted-list"><li style="list-style-type:circle">RIGHT</li></ul></li></ul><ul id="798214aa-304f-4dd8-9106-f855a16e1bfa" class="bulleted-list"><li style="list-style-type:disc">ON<ul id="649e5681-7cd8-4ad0-b243-955d7b0d1e8d" class="bulleted-list"><li style="list-style-type:circle">Nach dem Schlüsselwort <em>ON</em> wird die Verknüpfung vom Fremdschlüssel der einen Tabelle (<em>Lernende</em>) mit dem Primärschlüssel der anderen Tabelle (<em>Orte</em>) aufgeführt.<p id="00f13e4d-f840-4207-a82e-73ed2a49dbab" class="">Beispiel: <code>ON l.ort_id = o.id</code></p></li></ul><h2 id="a201853e-44c1-41fa-842d-af05803cb2f1" class="">Inner Join</h2><figure id="f99aba99-a511-46e6-9101-12ad15e502ae" class="image"><a href="8%20-%20SELECT%20mit%20JOIN%209f3acbaafdc74542a2134c79d48fae56/Untitled.png"><img style="width:282px" src="8%20-%20SELECT%20mit%20JOIN%209f3acbaafdc74542a2134c79d48fae56/Untitled.png"/></a></figure><p id="f0bf1313-38a2-436f-9197-b179c8bc2131" class="">INNER JOIN ist die Schnittmenge der beiden Tabellen. Es werden nur diejenigen Datensätze zurückgeliefert, die in beiden Tabellen vorkommen.</p><p id="da014fc4-9819-47dd-8737-9f67015de1ca" class=""><code>SELECT l.Vorname, l.Nachname, l.Strasse, o.PLZ, o.Ort</code></p><p id="0f5e5d08-cdeb-4b9a-899d-5c6af4de463c" class=""><code>FROM Lernende AS l</code></p><p id="95065e6b-c711-4901-b6f4-835e4c5d6970" class=""><code>INNER JOIN Orte AS o</code></p><p id="f3ce7032-a156-42ad-b39e-c78297e4bf00" class=""><code>ON l.ort_id = o.id;</code></p><p id="54061506-754d-4c84-af0b-9d12c56b9ff8" class="">Retourniere nur die Datensätze aus der Tabelle <em>Lernende</em>, in denen ein Fremdschlüsselwert <em>ort_id</em> vorhanden ist und ergänze die Ausgabe mit der Postleitzahl und dem Ort aus der Tabelle <em>Orte</em>.</p><p id="d1b9b574-88f9-4661-a522-4aaa74cdbeba" class="">
+</p><p id="280e796d-68a1-475a-b642-e6f2570aaf82" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Verbund mit 3 Tabellen:</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><p id="746ad3e3-074d-4aff-80dd-12505b5ebd3e" class=""><code>SELECT l.Vorname, l.Nachname, l.Strasse, o.PLZ, o.Ort, f.Firma</code></p><p id="beabd8df-cdaf-4a11-8603-1303e5d60f77" class=""><code>FROM Lernende AS l</code></p><p id="e1b9dc1c-82d9-4f9c-9873-9d8689333c7c" class=""><code>INNER JOIN Orte AS o</code></p><p id="20944c27-866d-4cc5-989e-01db15d49fc2" class=""><code>ON l.ort_id = o.id</code></p><p id="bc9bd505-109f-404c-9d5f-a43e2cce6b73" class=""><code>INNER JOIN Firmen AS f</code></p><p id="da906cc1-5605-4c20-b4e0-a117622ec8ed" class=""><code>ON l.firma_id = f.id;</code></p><h3 id="562c48c9-4e50-4867-a338-5ed89576dfd9" class="">Left Join (aka LEFT OUTER JOIN)</h3><figure id="c938d292-e7eb-4e37-842a-9418721f3fe3" class="image"><a href="8%20-%20SELECT%20mit%20JOIN%209f3acbaafdc74542a2134c79d48fae56/Untitled%201.png"><img style="width:282px" src="8%20-%20SELECT%20mit%20JOIN%209f3acbaafdc74542a2134c79d48fae56/Untitled%201.png"/></a></figure><p id="6ea4d4b8-20f3-4ca9-bbb1-75d00ce4103c" class=""><strong>Bedeutung</strong></p><p id="d128faa4-e711-4681-bcad-f71e2c7e5bd6" class="">Beim LEFT JOIN werden alle Datensätze der linken Tabelle zurückgegeben.</p><p id="15c7fbff-ebaa-4cba-8c55-b1a33ccb9d61" class=""><strong>Definition</strong></p><p id="b92f9cf7-8e3d-47b6-9326-0ba33c70cf7d" class="">LEFT JOIN gibt die linke Tabelle vollständig aus und von der rechten Tabelle nur die Datensätze, welche die ON-Klausel erfüllen.</p><p id="b91c1ff9-f86a-418e-b38d-f0d917d670de" class=""><strong>Testen Sie folgenden Befehl:</strong></p><p id="bf6e94bb-f914-434d-90ab-28d6cb610de8" class=""><code>SELECT l.Vorname, l.Nachname, l.Strasse, f.Firma</code></p><p id="481df783-8147-418a-82fa-37249f69ef15" class=""><code>FROM Lernende AS l</code></p><p id="f6927a51-0820-4d5b-8036-69ec4138b06d" class=""><code>LEFT JOIN Firmen AS f</code></p><p id="afc1f050-7b80-4938-8486-4c0100ec4b27" class=""><code>ON l.firma_id = f.id</code></p><p id="c65d1c62-05c3-473a-ac1d-5e19196202c1" class=""><code>ORDER BY l.Vorname;</code></p><p id="8058016b-936d-49b8-af0c-782ff1294173" class=""><strong>Ausgesprochen</strong></p><p id="f1c67580-feef-40e2-9e9c-61006f9d1d21" class="">Retourniere <strong>alle</strong> Datensätze der linken Tabelle <em>Lernende</em>, egal ob ein Fremdschlüsselwert <em>firma_id</em> vorhanden ist oder nicht. Falls ein Fremdschlüsselwert vorhanden ist: Ergänze die Ausgabe mit dem Firmennamen aus der Tabelle <em>Firmen</em>.</p><h3 id="1cdbd466-2657-4d7a-9057-c6464a5488e4" class="">LEFT Excluding JOIN</h3><figure id="d5539037-3091-4ccc-acfe-48b12fbbec5c" class="image"><a href="8%20-%20SELECT%20mit%20JOIN%209f3acbaafdc74542a2134c79d48fae56/Untitled%202.png"><img style="width:282px" src="8%20-%20SELECT%20mit%20JOIN%209f3acbaafdc74542a2134c79d48fae56/Untitled%202.png"/></a></figure><p id="d4024a20-38ef-40f6-b29b-a1c39f7bb7ea" class="">Spezialfall, wenn nur jene Einträge gewünscht sind, welche zu Tabelle B keinen Match aufweisen</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="7ad93a71-b0ad-496d-9fda-6bc18214cb6e" class="code"><code class="language-SQL">SELECT *
+FROM tableA a LEFT OUTER JOIN tableB b
+ON a.name = b.name
+WHERE b.name IS NULL;</code></pre><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="9db01742-914e-4321-b4bf-57671d0a9c16" class="code"><code class="language-SQL">+------+-----------+------+------+
+| id   | name      | id   | name |
++------+-----------+------+------+
+|    2 | Monkey    | NULL | NULL |
+|    4 | Spaghetti | NULL | NULL |
++------+-----------+------+------+</code></pre><h3 id="c84fd3c6-3dc2-4df9-9f50-e0a8943c27cb" class="">Right Join (aka RIGHT OUTER JOIN)</h3><figure id="bd438ec1-f0d1-4500-9fd1-cfa05edc82ea" class="image"><a href="8%20-%20SELECT%20mit%20JOIN%209f3acbaafdc74542a2134c79d48fae56/Untitled%203.png"><img style="width:282px" src="8%20-%20SELECT%20mit%20JOIN%209f3acbaafdc74542a2134c79d48fae56/Untitled%203.png"/></a></figure><p id="78bfbd47-2d3f-4133-8bf1-90d1e8aae6c7" class="">Right Joins sind im SQLite nicht möglich. Man muss deswegen einen LEFT-join machen und die Reihenfolge der Tabellen vertauschen.</p><p id="19478e9d-77d6-4ec5-a02b-66271702fe39" class="">In MySQL hingegen, kann man folgendes schreiben:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="de4ed146-5ca4-4c6a-abbc-d758132785c4" class="code"><code class="language-SQL">SELECT * FROM tableA a RIGHT JOIN tableB b
+ON a.name = b.name;</code></pre><h3 id="849e6d17-a1e6-48ad-9252-523f9564202e" class="">Right excluding Join</h3><figure id="19105408-072d-4f1e-b74b-ce638dcba986" class="image"><a href="8%20-%20SELECT%20mit%20JOIN%209f3acbaafdc74542a2134c79d48fae56/Untitled%204.png"><img style="width:282px" src="8%20-%20SELECT%20mit%20JOIN%209f3acbaafdc74542a2134c79d48fae56/Untitled%204.png"/></a></figure><p id="a6dce0c3-3bef-468a-a6c9-de0f354aa017" class="">Auch hier ist der Spezialfall möglich, wenn nur jene Einträge gewünscht sind, bei welchen keine Matches auf der linken Tabelle vorhanden sind.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="c7c9aff6-1b6a-4a6b-8306-ca9f87baa8cf" class="code"><code class="language-SQL">SELECT *
+FROM tableA a RIGHT OUTER JOIN tableB b
+ON a.name = b.name
+WHERE a.name IS NULL;</code></pre><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="dbe0962d-2d22-4050-9f0c-9315d9b05fb8" class="code"><code class="language-SQL">+------+------+------+-------------+
+| id   | name | id   | name        |
++------+------+------+-------------+
+| NULL | NULL |    1 | Rutabaga    |
+| NULL | NULL |    3 | Darth Vader |
++------+------+------+-------------+</code></pre><h3 id="2d4e175b-8693-44f4-9994-9b7da28dd810" class="">Full outer Join</h3><figure id="b064c671-6685-4765-9c80-82fc20545733" class="image"><a href="8%20-%20SELECT%20mit%20JOIN%209f3acbaafdc74542a2134c79d48fae56/Untitled%205.png"><img style="width:282px" src="8%20-%20SELECT%20mit%20JOIN%209f3acbaafdc74542a2134c79d48fae56/Untitled%205.png"/></a></figure><p id="757c441d-f637-48d2-abed-b295184fc395" class="">Ebenfalls nicht implementiert, kann jedoch mit einem UNION von LEFT und RIGHT Joins erschaffen werden</p><p id="2836d3e8-c13e-4904-a9a0-e8323746481f" class=""><code>SELECT l.Vorname, l.Nachname, l.Strasse, o.PLZ, o.Ort</code></p><p id="0958e846-0d5d-47c3-a3db-5ea8d7541211" class=""><code>FROM Lernende AS l</code></p><p id="13fece78-ee85-4f0f-896f-5cea565c2ceb" class=""><code>LEFT JOIN Orte AS o</code></p><p id="4366e8a5-2cf8-4d35-9dd9-bc838dfacf17" class=""><code>ON l.ort_id = o.id</code></p><p id="34de9635-27d3-4a5d-a187-87eb80244e77" class=""><code>UNION SELECT l.Vorname, l.Nachname, l.Strasse, o.PLZ, o.Ort</code></p><p id="cc91f538-17a0-4f7c-b53c-d4f7e3f4806c" class=""><code>FROM Orte AS o</code></p><p id="5ba928f5-c4ca-4a98-bac3-c72dca631a2a" class=""><code>LEFT JOIN Lernende AS l</code></p><p id="0483a214-2fdb-4566-a53f-e3ea368b1d89" class=""><code>ON l.ort_id = o.id</code></p><p id="ec78e92e-2195-43aa-b0ef-0b5427a6d38d" class=""><code>ORDER BY Ort;</code></p><h3 id="a523ddbc-4608-4fc5-894d-236fd49ae2df" class="">Outer Excluding JOIN</h3><figure id="88b9baad-75a6-4bca-9443-9befb9f3d81a" class="image"><a href="8%20-%20SELECT%20mit%20JOIN%209f3acbaafdc74542a2134c79d48fae56/Untitled%206.png"><img style="width:282px" src="8%20-%20SELECT%20mit%20JOIN%209f3acbaafdc74542a2134c79d48fae56/Untitled%206.png"/></a></figure><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="da40d8d9-5abb-4e6c-ab85-d6c6f7a187e7" class="code"><code class="language-SQL">SELECT *
+FROM tableA a LEFT OUTER JOIN tableB b
+ON a.name = b.name
+WHERE b.name IS NULL
+UNION
+SELECT *
+FROM tableA a RIGHT OUTER JOIN tableB b
+ON a.name = b.name
+WHERE a.name IS NULL;</code></pre><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="4d823c0d-4629-4140-9b60-4d88d9cea8c1" class="code"><code class="language-SQL">+------+-----------+------+-------------+
+| id   | name      | id   | name        |
++------+-----------+------+-------------+
+|    2 | Monkey    | NULL | NULL        |
+|    4 | Spaghetti | NULL | NULL        |
+| NULL | NULL      |    1 | Rutabaga    |
+| NULL | NULL      |    3 | Darth Vader |
++------+-----------+------+-------------+</code></pre><h3 id="b89cea0a-84a7-422f-9772-caa7e19e9e85" class="">Union</h3><p id="2b076932-5292-4097-8a60-2f0dd27a3de8" class="">Mit UNION können zwei Ausgaben zusammengefügt werden. Voraussetzung: Die beiden Attributlisten müssen identisch sein.</p><p id="1bc25f82-6b5a-4aa9-b7d6-08d6bd77b6da" class="">Beispiel: Wir wollen alle Adressen inkl. Ort von den Lernenden und von den Firmen in einer Ausgabe anzeigen. Die Liste soll nach 1. Ort und 2. Strasse sortiert werden.</p><p id="31a0e2cb-a4b1-4506-833f-b79ded4ba85c" class=""><code>SELECT Strasse, PLZ, Ort FROM Lernende l</code></p><p id="08c6a676-1a00-4324-87a3-9375f2c85343" class=""><code>JOIN Orte o ON l.ort_id = o.id</code></p><p id="6c467f0c-0ff0-47a3-825e-2c644f92e791" class=""><code>UNION SELECT Strasse, PLZ, Ort FROM Firmen f</code></p><p id="5069d94c-3538-41e1-90ef-e718feee740f" class=""><code>JOIN Orte o ON f.ort_id = o.id</code></p><p id="2294e2f8-0e8c-4542-9b1d-d7a1e50ca620" class=""><code>ORDER BY Ort, Strasse;</code></p><h3 id="d39090d0-aab1-4822-8824-925c9c690e97" class="">Self-Join</h3><p id="086cca96-e020-4fb0-929a-1a7dedcce09c" class="">Wenn man dieselbe Tabelle mit sich selber JOINED, nennt man dies ein “Self-Join”</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="0ecb6993-c25d-40eb-9aa1-33e23a6a4f16" class="code"><code class="language-SQL">SELECT e.last_name AS &#x27;Employee&#x27;, m.last_name AS &#x27;His Boss&#x27;
+FROM employee e INNER JOIN employee m
+ON e.manager_id = m.employee_id
+ORDER BY &#x27;His Boss&#x27;, &#x27;Employee&#x27;;</code></pre><h3 id="37a3126f-d448-4940-a8ec-7d0c84f99971" class="">Cross Join</h3><p id="59251d31-ed06-4eac-87b6-6054015550fb" class="">Verbindet jedes Element der linken Tabelle mit jedem Element der rechten Tabelle. Dies führt zu x * y Verbindungen, wenn die linke Tabelle x Elemente hat und die Rechte y.</p><p id="a1d4c7a6-2b24-479a-947b-f0530f13973f" class="">Es ist daher aus Performance-Gründen unerwünscht.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="535af2d9-12d5-486d-8e9d-feff0231a180" class="code"><code class="language-SQL">SELECT country_name, region_name 
+FROM country JOIN region;</code></pre><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="d96b2245-4f61-4bcc-a8bd-0e0c0522667b" class="code"><code class="language-SQL">| country_name             | region_name            |
++--------------------------+------------------------+
+| Argentina                | Europe                 |
+| Argentina                | Americas               |
+| Argentina                | Asia                   |
+| Argentina                | Middle East and Africa |
+| Australia                | Europe                 |
+| Australia                | Americas               |
+| Australia                | Asia                   |
+| Australia                | Middle East and Africa |
+| Belgium                  | Europe                 |
+| Belgium                  | Americas               |
+| Belgium                  | Asia                   |
+...</code></pre><h3 id="392d2e87-2973-4547-a2f8-354d299d33b5" class="">WHERE Position:</h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="48422656-94b1-4ec3-9559-127f52d890b0" class="code"><code class="language-SQL">SELECT o.ord_no, o.purch_amt, c.cust_name, c.city 
+FROM orders as o
+INNER JOIN customer as c
+ON o.customer_id = c.customer_id
+WHERE o.purch_amt BETWEEN 500 AND 2000
+ORDER BY o.purch_amt ASC;</code></pre></li></ul></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

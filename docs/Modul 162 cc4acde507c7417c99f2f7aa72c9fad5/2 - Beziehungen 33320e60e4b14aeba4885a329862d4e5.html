@@ -1,0 +1,696 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>2 - Beziehungen</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="33320e60-e4b1-4aeb-a488-5a329862d4e5" class="page sans"><header><h1 class="page-title">2 - Beziehungen</h1><p class="page-description"></p></header><div class="page-body"><h3 id="30971a12-687e-46e2-8482-d46b0efd35fe" class="">Ubuntu</h3><p id="dc20cdfa-cec4-4e74-b0ab-a69ea5d0e84a" class="">Ubuntu Linux ist eine Linux distribution auf Debian basierend.</p><h3 id="281c01cd-41c7-4d15-8062-18818da297f8" class="">SQLite</h3><ul id="3fc2300b-c049-41e4-9a18-840b78a5ad50" class="bulleted-list"><li style="list-style-type:disc">ist eine kommandozeilenbasierende SQL-Datenbank für Linux / Max / Windows</li></ul><ul id="200fbd20-a465-4595-8484-2361e265534e" class="bulleted-list"><li style="list-style-type:disc">Es ist sicher, schnell und “reduced to the max”</li></ul><p id="ba56c268-beda-4e3b-8b03-3094e3c04320" class="">
+</p><ul id="298ddeb7-0a17-4154-8db8-ede05089f76a" class="bulleted-list"><li style="list-style-type:disc">eine Datenbank kann mehrere Tabellen haben (z.B. customers, movies, orders)</li></ul><ul id="5aab303f-d7e4-4ad3-9407-6b2efde5ca3a" class="bulleted-list"><li style="list-style-type:disc">eine Tabelle kann mehrere Attribute haben (im Excel waren es Spalten, z.B movie od. email)</li></ul><ul id="870614d9-a965-4c97-95ee-5fa711557d4f" class="bulleted-list"><li style="list-style-type:disc">Unterschied ist im SQLite hat jedes Attribut ein Datentyp (z.B. “movie” TEXT NOT NULL)</li></ul><ul id="2c84d2c8-8dcb-4819-99de-6105e8002366" class="bulleted-list"><li style="list-style-type:disc">Es gibt nur INT und STRING als Datentypen</li></ul><ul id="3eb414e3-2c66-4cb4-9aeb-3ea9f612533a" class="bulleted-list"><li style="list-style-type:disc">Es gibt auch Primärschlüssel Attribut, welches als ID verwendet wird</li></ul><ul id="6aa1c597-6272-4c09-88eb-7e1e2372b596" class="bulleted-list"><li style="list-style-type:disc">Die einträge innerhalb einer Tabelle sind Datensätze</li></ul><p id="b342998e-7743-4ea8-856c-f161a7bd1adf" class="">
+</p><h3 id="c77778ae-8cef-4ffa-a094-5905f6f56a59" class="">DB Browser for SQLite</h3><ul id="414eb659-47ac-4fc6-99c5-8a04b40e5145" class="bulleted-list"><li style="list-style-type:disc">mit dem DB-Browser hat man eine visuelle Darstellung (UI) des SQL-files</li></ul><ul id="b19add9d-f3a7-4f28-8303-e52065840600" class="bulleted-list"><li style="list-style-type:disc">man kann darin die Tabellen, Datenbanken und auch Daten visuell sehen (Daten als sheet, Tabellen in einer Hierarchie-Struktur)</li></ul><ul id="a83fdfb8-9a8d-440b-8608-044bd10fba03" class="bulleted-list"><li style="list-style-type:disc">Man kann damit Daten löschen / Hinzufügen / filtern / sortieren</li></ul><ul id="3cff77e6-f219-49c4-8e75-cad7f2bd8694" class="bulleted-list"><li style="list-style-type:disc">Im Tab “SQL ausführen” kann man dann manuell mit der SQL-Sprache Queries ausführen<ul id="f43ec1d0-916c-40a1-bad0-9d3aa482b76b" class="bulleted-list"><li style="list-style-type:circle">Kann zum Beispiel sein </li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="616d0cb3-934b-4368-9413-3fadc6391e34" class="code"><code class="language-SQL">SELECT * FROM customers WHERE postal_code &gt; 8000</code></pre><ul id="4489471d-4027-475f-a515-99dfe23b2b4f" class="bulleted-list"><li style="list-style-type:circle">Aber kann eigentlich alles, also auch bearbeiten, löschen und Beziehungen zwischen Tabellen erstellen</li></ul></li></ul><p id="71542f11-09cd-4793-a848-be14c822699d" class="">
+</p><h3 id="7205fff7-4487-4898-9348-4578e1e4acc0" class="">RDBMS</h3><ul id="63d70f48-f514-42a6-b9fc-c109904a2950" class="bulleted-list"><li style="list-style-type:disc">RDBMS heisst Relationales DatenBankManagementSystem</li></ul><ul id="443a12f7-d8ef-49de-9130-f42972f4517e" class="bulleted-list"><li style="list-style-type:disc">Das system legt somit auch Beziehungen zwischen Daten fest</li></ul><ul id="eccc6da3-f067-4456-b11b-57f959564184" class="bulleted-list"><li style="list-style-type:disc">Eine relationale Datenbank besteht also aus einer Sammlung von Tabellen</li></ul><p id="cdefec85-c30c-4c3e-b458-c3171120520c" class="">
+</p><h3 id="8af73969-222a-4cb9-b0cb-7e303ad51d43" class="">Beziehungen</h3><ul id="c1c90990-9969-4488-9251-db3aba032f5c" class="bulleted-list"><li style="list-style-type:disc">Es gibt eine Primärtabelle mit Primärschlüsseln<ul id="7a410fef-7141-42d6-9307-eb6dc0bb6d59" class="bulleted-list"><li style="list-style-type:circle">auf diese wird später verwiesen</li></ul></li></ul><ul id="3ecad9fb-ff22-4f8a-8a7c-1d19324597e4" class="bulleted-list"><li style="list-style-type:disc">Und eine Detailtablle mit einem Fremdschlüssel<ul id="63a05523-40c5-457c-9a78-70537e94f34b" class="bulleted-list"><li style="list-style-type:circle">diese verweist auf die Primärtabelle</li></ul><ul id="49cb9110-18f6-4326-b7df-792816f1fd27" class="bulleted-list"><li style="list-style-type:circle">wenn dies nicht klappt ist das meistens wegen “Inkonsistenz”</li></ul></li></ul><ul id="87b0e6d0-0c3c-4476-933f-9f454be7d1e6" class="bulleted-list"><li style="list-style-type:disc">Sie sind vom gleichen Datentyp</li></ul><ul id="f16a8696-8faf-4639-afde-185929409e77" class="bulleted-list"><li style="list-style-type:disc">Und jeder Fremdschlüsselwert muss in der Primärtabelle mit einem Primärschlüssel übereinstimmen</li></ul><p id="9a6bb7b1-32a3-437c-9215-33b45a155768" class="">
+</p><p id="e1498f66-8ba7-4f20-a575-08265e2dac2d" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Zum Beispiel</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><p id="dcaef87c-3a3a-4762-a914-00f1d111b9a0" class="">
+</p><p id="41f690f2-cc68-4335-bf46-8e47826a4796" class=""><strong>1:m</strong></p><ul id="8ffa4854-9f93-4a8b-871b-8f4a7c33756c" class="bulleted-list"><li style="list-style-type:disc">Primärtabelle “Customers”</li></ul><ul id="d13c8040-ac5c-43d1-909d-1be652dfb41f" class="bulleted-list"><li style="list-style-type:disc">Detailtabelle “Orders”</li></ul><ul id="23b9e91f-48cc-417e-9ab4-7ccfec37c315" class="bulleted-list"><li style="list-style-type:disc">Jeder order hat einen Customer</li></ul><ul id="762cd8bc-6f96-443d-a030-9a53b3222a1b" class="bulleted-list"><li style="list-style-type:disc">Aber ein Customer kann mehrere Orders haben</li></ul><ul id="a81ccabe-2284-46ae-8ace-aa26283b6551" class="bulleted-list"><li style="list-style-type:disc">es ist also eine 1:m Beziehung, die Primärschlüssel können mehrere male in der Detailtabellen verlinkt werden, aber nicht anders rum</li></ul><p id="f8116c82-2c0c-4ae2-977f-a6cfe2ff6b0a" class="">
+</p><p id="6ed22d2a-9127-435f-ac07-50518c744444" class=""><strong>m:m</strong></p><ul id="37e7f86b-9431-4928-b15c-02a9cbce17b8" class="bulleted-list"><li style="list-style-type:disc">Zum Beispiel Orders &amp; Movies</li></ul><ul id="c8ffa7d2-f3e7-4349-9aef-7a41ca1d3d7f" class="bulleted-list"><li style="list-style-type:disc">Ein Order kann 1 oder mehrere Movies haben</li></ul><ul id="2fcbf90d-3476-4e23-ae34-045a785d169e" class="bulleted-list"><li style="list-style-type:disc">Gleichzeitig kann 1 Movie 1 oder mehrere Orders haben</li></ul><ul id="2e6cd2d3-0c67-490e-8247-d6ec918a205b" class="bulleted-list"><li style="list-style-type:disc">Wenn man nun eine Order-Tabelle hat, hat man das Problem, dass wenn in einer Bestellung mehrere Filme gekauft wurden, die Bestellung in mehrere Zeilen aufgeteilt werden muss, eine pro Film</li></ul><ul id="53d523e0-1ebf-45cd-872d-3ee7b72db493" class="bulleted-list"><li style="list-style-type:disc">Man kann dies verhindern, indem man eine Zwischentabelle macht, welche die Movies zu den Bestellnummers verlinkt</li></ul><ul id="03b8fb20-b0b9-47a7-bc94-d5ef95a0aaa3" class="bulleted-list"><li style="list-style-type:disc">Nun braucht man pro Bestellung nur eine Zeile</li></ul><p id="d9c49bda-9a95-47d7-bd47-181a35bff938" class="">
+</p><h3 id="7a2b8318-cda0-4683-9b00-ee12c33f3c83" class="">Beziehungstypen</h3><p id="54eea88e-1a6c-4a0a-a0ab-d8ec0cd10fad" class="">
+</p><ul id="7614f0b4-9b7c-474f-9d78-1600413c1fb6" class="bulleted-list"><li style="list-style-type:disc">1<ul id="088bf28e-f9a8-4758-923c-94029b0b007c" class="bulleted-list"><li style="list-style-type:circle">Kann mit nur einer anderen Entität verbunden werden</li></ul></li></ul><ul id="f89004a6-9fb2-452f-8438-cf085fa435a2" class="bulleted-list"><li style="list-style-type:disc">c<ul id="4b6fcd14-4f5d-428d-b447-b0fb8b2a3f33" class="bulleted-list"><li style="list-style-type:circle">Konditionelle 1, kann auch 0 verbindungen haben</li></ul></li></ul><ul id="639640a3-9635-4cbb-9f08-0557d5112c5d" class="bulleted-list"><li style="list-style-type:disc">m<ul id="ac9eb470-060b-42cb-8010-443fa0defcb6" class="bulleted-list"><li style="list-style-type:circle">Kann mit einer oder mehreren Entitäten verbunden werden</li></ul></li></ul><ul id="d3d09380-a837-4a1c-8518-d373e7b14c30" class="bulleted-list"><li style="list-style-type:disc">mc<ul id="e1bcb6c0-0af0-45cd-904d-4de009042c97" class="bulleted-list"><li style="list-style-type:circle">Konditionelles m, kann auch 0 Verbindungen haben</li></ul></li></ul><p id="99f42410-d3aa-4dd9-8723-401e13490d07" class="">
+</p><ul id="53cc93c8-45f4-4293-b2db-e9f167fae562" class="bulleted-list"><li style="list-style-type:disc">In relationalen Datenbanken sind nur  1:c, 1:mc, &amp; mc : mc möglich<ul id="87e39b70-cc2f-4641-a094-c51043559d5c" class="bulleted-list"><li style="list-style-type:circle">Die Beziehungen sind also immer konditionell</li></ul></li></ul><p id="6868f17e-83d5-4698-9ff7-9c51367aca66" class="">
+</p><h3 id="59c0b716-e25a-4d85-953e-3343e9aac7cc" class="">Ergänzungen zum Primärschlüssel</h3><ul id="27dac101-381b-4396-abd9-34421b8c535d" class="bulleted-list"><li style="list-style-type:disc">Die Vergabe ist beliebig, da die Reihenfolge in einer Tabelle keinene Aussagekraft hat<ul id="dbdac483-50bf-481c-8961-09f222d4ca40" class="bulleted-list"><li style="list-style-type:circle">Es kann also vorkommen, dass gewisse Werte nicht existieren, z.B. 1, 2, 3, 6, 9</li></ul></li></ul><ul id="9514b289-6257-4aa4-a223-13a4814915a2" class="bulleted-list"><li style="list-style-type:disc">Der Wert muss jedoch eindeutig sein</li></ul><ul id="5efb9afe-3008-458f-aebf-f17116f27f59" class="bulleted-list"><li style="list-style-type:disc">Es müssen ganze, positive Zahlen sein</li></ul><ul id="7004a34c-1588-4db2-842a-e502680acc3b" class="bulleted-list"><li style="list-style-type:disc">Jede Tabelle sollte einen Primärschlüssel definieren</li></ul><ul id="ffe9a269-a1aa-45e6-bbb1-b15fc332d1df" class="bulleted-list"><li style="list-style-type:disc">Das DBMS macht das normalerweise automatisch (ATUINCREMENT)</li></ul><p id="90cc5dc9-d694-4296-ae4b-c97428fed5a6" class="">
+</p><h3 id="2d1faba5-c53e-43e0-b5b8-5fd9f16e5dea" class="">Beispiele komplexere Queries</h3><p id="e6ab2fb5-920c-4551-83b7-42309f30ab5d" class="">
+</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="ebb3b854-d37b-4264-a859-34da8dd1bfe2" class="code"><code class="language-SQL">SELECT last_name AS Nachname, first_name AS Vorname, SUM(amount_chf) AS Betrag
+FROM customers AS c
+JOIN orders AS o
+ON o.customer_id = c.id
+WHERE last_name = &quot;Watman&quot;
+AND first_name = &quot;Omar&quot;;</code></pre><p id="6ab50171-d89f-4573-af76-4a4b06c9865f" class="">→ Den Totalbetrag von allen Filmkäufen des Kunden Omar Watman anzeigen als Tabelle</p><p id="3943e378-f8a9-480a-911b-80e2af0fdc2e" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

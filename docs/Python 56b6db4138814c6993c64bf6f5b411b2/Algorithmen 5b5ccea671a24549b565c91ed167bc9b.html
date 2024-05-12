@@ -1,0 +1,721 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Algorithmen</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="5b5ccea6-71a2-4549-b565-c91ed167bc9b" class="page sans"><header><h1 class="page-title">Algorithmen</h1><p class="page-description"></p></header><div class="page-body"><p id="5fbd496f-e582-4798-8008-5bf1d6f58d3a" class="">
+</p><p id="e8b0e88a-f15b-488b-8feb-28c1aa8e0c3e" class="">Eine endliche Abfolge von Instruktionen zum Lösen eines Problems</p><p id="29024587-3a84-4db4-8a04-e5899a74dcb3" class="">Algorithmen sind ein Set von Instruktionen. Es muss nicht unbedingt ein Programm sein. Es könnte auch ein Kochrezept sein. </p><p id="db561342-cf37-47a0-9741-ce08e1b60cec" class="">Teilen grundsätzlich folgende Eigenschaften:</p><ul id="296d80f7-305f-41c3-af35-d9adf4a56652" class="bulleted-list"><li style="list-style-type:disc">Input</li></ul><ul id="effc30c9-411d-4341-8a6b-1fd24d23ad55" class="bulleted-list"><li style="list-style-type:disc">Output</li></ul><ul id="8dbee38e-373d-4073-9bf3-8ebb616dd943" class="bulleted-list"><li style="list-style-type:disc">Eindeutig (Schritte sind klar)</li></ul><ul id="1803265b-1351-4b41-a30f-c68e3f3c6ce0" class="bulleted-list"><li style="list-style-type:disc">Korrekt (Output ist korrekt)</li></ul><ul id="31c67862-5b05-4c39-b638-af10bdcb5961" class="bulleted-list"><li style="list-style-type:disc">Endlich (Die Anzahl Schritte soll endlich sein)</li></ul><ul id="16608f2c-7ec5-4f60-b5f3-96beafa25e45" class="bulleted-list"><li style="list-style-type:disc">Effektiv (Jeder Schritt in endlicher Zeit erledigt)</li></ul><ul id="75f144e4-166e-47f5-9f67-f73b4b198902" class="bulleted-list"><li style="list-style-type:disc">Generell (sollte wieder verwendbar sein)</li></ul><p id="9df8c386-374a-49cb-800d-d5733cf01cb9" class="">
+</p><p id="17c2b052-9353-4184-88e4-96228a2cc8d7" class="">Damit ein Algorithmus zur Lösung einer Aufgabe in Programmen eingesetzt werden kann, muss er bestimmte Eigenschaften besitzen.</p><ul id="202cd07a-5931-4638-bef9-5d21b8bacd8b" class="bulleted-list"><li style="list-style-type:disc">Endlich: Der Algorithmus muss vollständig mit einer endlichen Anzahl von Anweisungen beschrieben werden können</li></ul><ul id="286ddf36-39fe-41a8-9463-f322159587a8" class="bulleted-list"><li style="list-style-type:disc">Allgemein: Der Algorithmus muss für die gleichen Eingabedaten immer das gleiche Ergebnis liefern</li></ul><ul id="95afa052-80dd-468b-a54d-35cae69a04ca" class="bulleted-list"><li style="list-style-type:disc">Eindeutig: Jeder Schritt des Algorithmus muss eindeutig ausgeführt werden können</li></ul><ul id="f65b9b4c-cd45-48b1-a1e7-3f3e00e2cf05" class="bulleted-list"><li style="list-style-type:disc">Terminiert: Der Algorithmus muss nach einer endlichen Anzahl von Schritten zum Ende kommen</li></ul><p id="5c2cd80d-959c-455c-9f1c-c4d49298d995" class="">Algorithmen können nach verschiedenen Kriterien unterschieden werden, z. B. nach der Art der Abarbeitung oder dem Umgang mit Datentypen.</p><p id="e29e21b9-c4d8-4ffc-a2dd-68f31e338097" class="">
+</p><h2 id="0b7aac17-cbee-4811-beb6-f139ea971ef2" class="">Suchalgorithmen</h2><ul id="74e5812d-8a2b-4152-9270-7d9a897b128c" class="bulleted-list"><li style="list-style-type:disc">Können linear sein (geht über jedes Element, bis gefunden)</li></ul><ul id="720a41ab-1578-4432-8697-c4288d172b86" class="bulleted-list"><li style="list-style-type:disc">oder binär <ul id="fcf8d4af-1096-45a8-a8b8-9d9d6095b8de" class="bulleted-list"><li style="list-style-type:circle">geht nur wenn die liste sortiert ist</li></ul><ul id="8696c857-e989-4195-a912-29d3f91d4ecb" class="bulleted-list"><li style="list-style-type:circle">Beispiel: man sucht eine Zahl zwischen 1 und 100 und jedes mal bekommt man einen Tipp, ob die geschätzte Zahl zu hoch oder zu tief ist. Nun braucht man maximal log(2)100 Versuche (zuerst Tippt man 50, dann z.B. 75, usw. …)</li></ul></li></ul><p id="3992dffb-fc2c-442e-a9eb-281bf65b78cf" class="">
+</p><h2 id="b2e91356-b042-4597-b61d-5c6b4f95c269" class="">Sortieralgorithmen</h2><ul id="1340e6f2-693d-47ae-acad-cdd4d11df93d" class="bulleted-list"><li style="list-style-type:disc">Bubblesort<ul id="63191b04-472e-46a1-85bc-37cb88651415" class="bulleted-list"><li style="list-style-type:circle">jedes Element frägt das nächste, ob es grösser ist als das nächste. Wenn ja tauschen sie Plätze. Wenn nein, geht es mit dem nächsten weiter. Dies geht solange, bis keine Plätze mehr getauscht werden</li></ul></li></ul><ul id="3e9885cc-ee8c-4825-bd2a-c807935f68d4" class="bulleted-list"><li style="list-style-type:disc">Insertionsort<ul id="b9c049cf-1c05-4c2d-a39c-e4c2a0748d4c" class="bulleted-list"><li style="list-style-type:circle">Passiert mit zwei listen, statt mit einer</li></ul><ul id="0e66dd00-fd23-4a14-a817-ffc659b0b57f" class="bulleted-list"><li style="list-style-type:circle">Am Anfang ist die erste liste voll, die zweite leer</li></ul><ul id="aee4b3ea-861e-4c53-a273-0d20cd1fefb4" class="bulleted-list"><li style="list-style-type:circle">danach wir ein zufälliges Element in die zweite liste übergetragen</li></ul><ul id="b305155f-86b6-4fb6-95c1-daaa1cd176ac" class="bulleted-list"><li style="list-style-type:circle">danach ein zweites, welches das erste fragt, ob es grösser ode kleiner ist<ul id="8c1db719-7194-49fc-8179-465e5f2f6f83" class="bulleted-list"><li style="list-style-type:square">je nach je, geht es dann links oder rechts</li></ul></li></ul><ul id="bc1223c9-e05f-483e-b2ef-a17d882e7510" class="bulleted-list"><li style="list-style-type:circle">danach kommt ein drittes, fängt links an und frägt erneut usw.</li></ul><ul id="c2d60fb6-751c-4045-b6db-cff3578f061d" class="bulleted-list"><li style="list-style-type:circle">Ist vorallem bei kleineren Mengen von Listenelementen schneller als der Bubble-Sort</li></ul><ul id="7634ba06-f0ab-4d93-a1ba-5eb7fbb44641" class="bulleted-list"><li style="list-style-type:circle">Muss jedoch eine zusätzliche Liste generieren</li></ul></li></ul><ul id="18b410f8-8f6d-4ea5-9b09-446175963880" class="bulleted-list"><li style="list-style-type:disc">Merge sort<ul id="931dda6e-9102-4e13-9338-acc961a23e96" class="bulleted-list"><li style="list-style-type:circle">Divide and conquer </li></ul><ul id="3764e30d-6a48-4163-8c85-918fcd70c70a" class="bulleted-list"><li style="list-style-type:circle">Array wird in kleinere Arrays gesplittet. Danach werden sie nach Bubble-Sort sortiert. Anschliessend werden sie wieder zusammengefügt</li></ul></li></ul><p id="e34aa08f-ceed-4423-a919-7d8bf2b1bd8b" class="">
+</p><h2 id="91e8ae2c-d328-43dc-af30-87b85f9e605c" class=""><strong>Iterativer Algorithmus</strong></h2><p id="cdcfafd0-552b-4671-8f8d-044b35b612d2" class="">Ein iterativer Algorithmus löst eine Aufgabe mit Schleifen-Durchläufen.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="7f4f5ed9-9d88-499b-ba75-1365f67712d6" class="code"><code class="language-Python" style="white-space:pre-wrap;word-break:break-all"># Berechnung der Fakultät mit einem iterativen Algorithmus# Die Fakultät ist in der Mathematik eine Funktion, die einer natürlichen Zahl das Produkt aller natürlichen Zahlen (ohne Null) kleiner und gleich dieser Zahl zuordnet.
+
+def comp_fact(x):
+    result = 1
+    while x &gt; 1:
+        result = result * x
+        x = x - 1
+    return result
+
+
+print(comp_fact(4))</code></pre><p id="ba346749-79f9-46dc-94cd-dda707d97ab1" class="">
+</p><h2 id="1722c239-3426-4535-9464-919d05feb2e7" class=""><strong>Rekursiver Algorithmus</strong></h2><p id="66203d06-ad22-4d5c-82c1-7279b2b88353" class="">Die meisten Programmiersprachen unterstützen sogenannte rekursive Funktionsaufrufe – auch Selbstaufrufe genannt.</p><p id="f5031b90-c32d-440d-b536-982aa2de238e" class="">Wenn eine Funktion sich selber aufruft, muss dies, wie bei einer Schleife, durch eine Bedingung terminiert sein, dass sie nicht endlos läuft. </p><p id="efaa46ef-c26b-40ea-aca4-8602279f9db0" class="">Wenn in einer Funktion dieselbe Funktion erneut aufgerufen wird, stoppt der Code und geht mit dem neuen Aufruf weiter. </p><p id="58675266-b31e-4164-beae-3d9adda98601" class="">Dies geht weiter und weiter so. Jedesmal, wenn die Funktion bei der Rekursion angelangt, geht sie einen Schritt tiefer. </p><p id="adb4919f-b3d7-4630-a64b-44ce29c01feb" class="">Es entsteht ein Stack, mit dem LIFO Prinzip. </p><p id="8b0cc212-a8e2-4c59-8059-ea03ec8f5bfa" class="">Es ist also der “tiefste” Schritt, welcher als erstes ausgeführt wird und der erste Funktionsaufruf wird somit als letztes beendet. </p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="6fb7735e-2a4b-4e2e-8cd9-f1ca01c73b4f" class="code"><code class="language-Python"># Berechnung der Fakultät mit einem rekursiven Algorithmus
+
+def comp_fact(x):
+    if x &gt; 0:
+        return x * comp_fact(x - 1)
+    else:
+        return 1
+
+
+print(comp_fact(4))</code></pre><figure id="bdb27c11-16c1-4638-85e9-70939a2ddfe9" class="image"><a href="Algorithmen%205b5ccea671a24549b565c91ed167bc9b/Untitled.png"><img style="width:1446px" src="Algorithmen%205b5ccea671a24549b565c91ed167bc9b/Untitled.png"/></a></figure><h2 id="634a5e4b-7931-4cd6-b8bc-1817428e149b" class=""><strong>Iterativ oder rekursiv?</strong></h2><p id="a24d046a-3252-4bfb-8b87-0b58c97efd37" class="">Die iterativen und rekursiven Algorithmen spielen in der Programmierung eine wesentliche Rolle, da viele Probleme je nach Anforderung entweder durch Iteration oder Rekursion gelöst werden können.</p><p id="0f19fd20-fd43-408a-a520-45ba4c0e812a" class="">Kurz gesagt:</p><ul id="33d787a9-e0cf-4728-996b-a29f95a76e57" class="bulleted-list"><li style="list-style-type:disc">Rekursive Lösungen können schneller entwickelt werden, da der Algorithmus nicht komplex wird und somit übersichtlicher ist</li></ul><ul id="688c229d-01f6-488b-be88-79fa6ec5b697" class="bulleted-list"><li style="list-style-type:disc">Iterative Lösungen enthalten in den meisten Fällen einen komplexen Algorithmus, können jedoch leichter optimiert werden (Performance)</li></ul><p id="1081ef5f-bc4a-4cb3-b811-073bdf2f16c8" class="">
+</p><h2 id="90571815-2d63-463a-8c8c-4578195ef550" class="">Generischer Algorithmus</h2><p id="8606dd07-337b-4574-8c6f-1b0b89ce6ecc" class="">Ein algorithmus, welcher auf bestimmte Datentypen ausgelegt ist. Er funktioniert z.B. nur mit int oder string. </p><p id="ed6aced7-ed1f-448e-be0a-2ad6ead49adb" class="">
+</p><h2 id="233e1563-cfbc-45ea-af63-c28d7a177d81" class="">Beispiel Rekursiver Algorithmus</h2><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="87fbcbe8-5ea8-47ee-8d45-11839b08366e" class="code"><code class="language-Python">number_to_collatz = 13
+
+
+def collatz(number, step):
+    if number == 1:
+        return step
+    elif number % 2 == 0:
+        print(&quot;number is &quot;, number / 2)
+        step += 1
+        return collatz(number / 2, step)
+    else:
+        print(&quot;number is &quot;, number * 3 + 1)
+        step += 1
+        return collatz(number * 3 + 1, step)
+
+
+print(&quot;Start value is&quot;, number_to_collatz)
+print(&quot;reached 1 in &quot;, collatz(number_to_collatz, 0), &quot; steps&quot;)</code></pre><ul id="08788618-291c-4f8a-9e06-5910b9d44825" class="bulleted-list"><li style="list-style-type:disc">collatz-funktion </li></ul><ul id="bb20b434-3fb7-47dc-9d71-ef033cadda9c" class="bulleted-list"><li style="list-style-type:disc">Achtung: hier müssen <strong><strong><strong><strong>alle</strong></strong></strong></strong> rekursiven Funktionsausführungsbefehle ein <code>return</code> vornedran haben. Nur zu returnen wenn die Zahl 1 ist funktioniert nicht, weil man die Zahl dann nur ein Rekursives Level nach oben returned, aber nicht bis ganz nach oben zum print.  </li></ul></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

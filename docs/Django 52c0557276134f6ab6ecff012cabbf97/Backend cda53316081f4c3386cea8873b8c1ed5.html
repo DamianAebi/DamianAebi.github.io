@@ -1,0 +1,862 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Backend</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="cda53316-081f-4c33-86ce-a8873b8c1ed5" class="page sans"><header><h1 class="page-title">Backend</h1><p class="page-description"></p></header><div class="page-body"><h1 id="b8016b41-73c3-46f8-bca0-eae34a322ef4" class="">Setup</h1><ul id="6c1c2a88-88b8-409f-a960-84783a50b6c9" class="bulleted-list"><li style="list-style-type:disc">DJANGO rest framework installieren</li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="00667fe0-d8fb-415d-ad37-cfa02df7f190" class="code"><code class="language-Python">pip install djangorestframework
+pip install markdown       # Markdown support for the browsable API.
+pip install django-filter  # Filtering support</code></pre><ul id="599c79ad-1fc2-4541-8827-7f2faeb739fc" class="bulleted-list"><li style="list-style-type:disc">simpleJWT installieren</li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="f2de62d3-b121-460a-84ae-35973c3f60cf" class="code"><code class="language-Python">pip install djangorestframework-simplejwt</code></pre><ul id="5c571b11-501c-40f0-8fad-cedfea71f6bf" class="bulleted-list"><li style="list-style-type:disc"><a href="http://settings.py">settings.py</a> ergänzen: </li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="def779a6-b7c2-4063-9e81-a899e6db3d94" class="code"><code class="language-Python"># REST
+INSTALLED_APPS = [
+    ...
+    &#x27;rest_framework&#x27;,
+]
+
+# simpleJWT
+REST_FRAMEWORK = {
+    &#x27;DEFAULT_AUTHENTICATION_CLASSES&#x27;: (
+        &#x27;rest_framework_simplejwt.authentication.JWTAuthentication&#x27;,
+    )
+}
+
+SIMPLE_JWT = {
+    &#x27;ACCESS_TOKEN_LIFETIME&#x27;: timedelta(days=1),
+    &#x27;REFRESH_TOKEN_LIFETIME&#x27;: timedelta(days=1),
+}</code></pre><ul id="4bc6c324-a319-42d8-88b9-3a69a42c3dc5" class="bulleted-list"><li style="list-style-type:disc">urls.py ergänzen: </li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="8a05c6e2-f0ed-4d70-8133-35a60210ebdc" class="code"><code class="language-Python">urlpatterns = [
+		...
+    path(&#x27;api/token&#x27;, TokenObtainPairView.as_view(), name=&#x27;token_obtain_pair&#x27;),
+    path(&#x27;api/token/refresh&#x27;, TokenRefreshView.as_view(), name=&#x27;token_refresh&#x27;),
+]</code></pre><h1 id="3cd3e01b-cec4-42ec-a4da-c75c37b36f25" class="">Serialization</h1><ul id="378777d7-e208-48df-bfc7-4ad0f85b14fa" class="bulleted-list"><li style="list-style-type:disc">Serialisierung bedeutet, dass Man Instanzen von Objekten hat, welche man in eine (z.B. über das Internet) transportierbare Form verwandeln will (z.B. in text bzw. JSON)</li></ul><ul id="0d8478d0-7826-4221-ac10-0468b5f058fd" class="bulleted-list"><li style="list-style-type:disc">Deserialisierung ist der umgekehrte Prozess</li></ul><ul id="6c4f8edf-d691-42f8-b04e-9b8af0c0d701" class="bulleted-list"><li style="list-style-type:disc">Mit dem Django-REST Framework kann man seine Models serialisieren, indem man ein <code>serializers.py</code> File erstellt:</li></ul><figure id="401ba0d5-7e03-42d6-9274-5f230729a266" class="image"><a href="Backend%20cda53316081f4c3386cea8873b8c1ed5/Untitled.png"><img style="width:1365px" src="Backend%20cda53316081f4c3386cea8873b8c1ed5/Untitled.png"/></a></figure><p id="8707bc7b-9dc9-4b88-a39a-0211de78f10a" class="">Diese Klasse sorgt dafür, dass alle Felder des Kontakt-Objektes zu JSON serialisiert werden:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="ed24ceac-4d3b-49a3-b591-d0b23fcec1a9" class="code"><code class="language-Python">class ContactSerializer(ModelSerializer):
+    class Meta:
+        model = Contact
+        fields = &#x27;__all__&#x27;</code></pre><h3 id="a528d40d-c109-4ce3-a0c9-05e808613f21" class="">ModelSerializer einbinden</h3><ul id="cc978854-8152-4255-93f7-72ab2fdf4a88" class="bulleted-list"><li style="list-style-type:disc"><a href="http://views.py">views.py</a> ergänzen</li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="4d0b01a9-2f9d-48a3-bcc5-1446fbdecfc3" class="code"><code class="language-Python">class ContactViewSet(viewsets.ModelViewSet):
+    serializer_class = ContactSerializer
+    permission_classes = [IsAuthenticated]
+    queryset = Contact.objects.all()
+
+    def get_queryset(self):
+        return Contact.objects.filter(user=self.request.user)</code></pre><ul id="fe6573fe-93e2-4e1a-a1d0-bdea54387489" class="bulleted-list"><li style="list-style-type:disc"><a href="http://urls.py">urls.py</a> ergänzen</li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="435a41c0-b627-4387-8bbd-d99766d4512b" class="code"><code class="language-Python">router = DefaultRouter(trailing_slash=False)
+router.register(&#x27;contacts&#x27;, ContactViewSet)
+
+urlpatterns = [
+    ...
+    path(&#x27;api/&#x27;, include(router.urls)),
+		... 
+]</code></pre><h3 id="d902bc36-c6b3-4fd1-ad3a-19779213f4b3" class="">Custom Serialization</h3><p id="ee6d2c0d-0697-4814-9f0b-59b1322b6717" class="">SerializerMethodField für den author, damit er als  “Vorname Nachname” angezeigt wird</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="f10a5e6d-f0ca-43ab-815c-45f463a54738" class="code"><code class="language-Python">class BookSerializer(ModelSerializer):
+    author = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Book
+        fields = &#x27;__all__&#x27;
+
+    def get_author(self, obj):
+        return f&quot;{obj.author.first_name} {obj.author.last_name}&quot;</code></pre><p id="513cadae-48cf-44d7-8cf4-52de8f1c1672" class="">Custom UserSerializer für den User, welcher in der “create” Methode angewendet wird</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="a012cc0e-1cd3-4ca2-ac40-35e04834669f" class="code"><code class="language-Python">class CommentSerializer(ModelSerializer):
+    user = UserSerializer(read_only=True)
+
+    class Meta:
+        model = Comment
+        fields = &#x27;__all__&#x27;
+
+    def create(self, validated_data):
+        comment = Comment.objects.create(**validated_data, user=self.context[&#x27;request&#x27;].user)
+        return comment</code></pre><p id="56b47e40-524e-4e87-b368-4811cd6a92aa" class="">Custom Serializer-Attribut “items_pk”. Wenn es bei einem Update-Request (PUT / PATCH) übergeben wird, dann wird es bei den “items” hinzugefügt. </p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="3587737e-bab6-4171-80a6-56e71e1d0f4c" class="code"><code class="language-Python">class WishlistSerializer(ModelSerializer):
+    items_pk = serializers.ListField(child=serializers.IntegerField(), write_only=True, required=False)
+		[...]
+
+    def update(self, instance, validated_data):
+        # check if any items_pk are provided. If so, remove all items from the wishlist and add the new ones.
+        items_pk = validated_data.pop(&#x27;items_pk&#x27;, [])
+        if len(items_pk) &gt; 0:
+            instance.items.remove(*instance.items.all())
+            for item_pk in items_pk:
+                instance.items.add(item_pk)
+
+        # update the other fields of the wishlist if provided.
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+
+        instance.save()
+        return instance</code></pre><figure id="592915aa-92d6-4b17-bbaf-ced156328db3" class="image"><a href="Backend%20cda53316081f4c3386cea8873b8c1ed5/Untitled%201.png"><img style="width:708px" src="Backend%20cda53316081f4c3386cea8873b8c1ed5/Untitled%201.png"/></a></figure><h1 id="51a99da8-ab6b-4347-af9e-1b45579e8db4" class="">API Requests (Postman)</h1><h3 id="6acf136d-c101-40ce-8888-64868eb1c8dc" class="">Login</h3><ul id="a5917e94-d42c-49f3-ac3f-757cdefcc6f5" class="bulleted-list"><li style="list-style-type:disc">Wenn man sich einloggt, kriegt man ein Cookie mit einem Session-Token</li></ul><ul id="07a43158-8e6f-49f3-b253-bf422d585f33" class="bulleted-list"><li style="list-style-type:disc">Cookies sind lokal abgespeicherte Dateien</li></ul><ul id="7093b27c-1eff-4316-9458-1c3cdb8c957a" class="bulleted-list"><li style="list-style-type:disc">Jedoch werden sie bei jedem Request dem Server geschickt</li></ul><ul id="ab504396-88ab-4654-9be3-48e5601b9a72" class="bulleted-list"><li style="list-style-type:disc">So kann beim nächsten aufrufen der Seite das Login übersprungen werden, da wegen der Session-ID im gesendeten Cookie bereits klar ist, dass es sich um den gesuchten user handelt</li></ul><h3 id="dd193312-c060-4605-ba95-41dcbc8420d4" class="">Token request</h3><figure id="735bc038-5c0b-4510-bd34-99f0c1b16a69" class="image"><a href="Backend%20cda53316081f4c3386cea8873b8c1ed5/Untitled%202.png"><img style="width:1343px" src="Backend%20cda53316081f4c3386cea8873b8c1ed5/Untitled%202.png"/></a><figcaption>Um den Token zu bekommen, reicht ein POST-Request auf <a href="http://localhost:8000/api/token">http://localhost:8000/api/token</a>, wobei im body des Requests ein valider Username mit Passwort überreicht werden muss. Rückgabe ist ein Refresh-Token und ein Access-Token.</figcaption></figure><p id="28e2013f-a16a-4a46-8f03-20a2e847f16e" class="">
+</p><h3 id="dfae9010-e580-4db4-8032-582f0ca396a6" class="">Contacts GET request</h3><figure id="cc0c13bd-4966-4d70-b56c-0eaeb695c418" class="image"><a href="Backend%20cda53316081f4c3386cea8873b8c1ed5/Untitled%203.png"><img style="width:1383px" src="Backend%20cda53316081f4c3386cea8873b8c1ed5/Untitled%203.png"/></a><figcaption>GET-Request auf <a href="http://localhost:8000/api/contacts">http://localhost:8000/api/contacts</a> nachdem der Bearer Token eingefügt wurde gibt die Kontakte serialisiert zurück.</figcaption></figure><h3 id="367db41f-2fb8-4014-9050-c747b68f371f" class="">Contacts POST request</h3><figure id="65abc00a-8d29-43d4-bd4a-32d4933113ae" class="image"><a href="Backend%20cda53316081f4c3386cea8873b8c1ed5/Untitled%204.png"><img style="width:1315px" src="Backend%20cda53316081f4c3386cea8873b8c1ed5/Untitled%204.png"/></a><figcaption>POST-Request auf <a href="http://localhost:8000/api/contacts">http://localhost:8000/api/contacts</a> nachdem im Body die notwendigen Form-Daten hinzugefügt wurden erstellt ein neues Objekt in der Datenbank </figcaption></figure><h3 id="c6ecd326-f511-422b-9c2d-e254d7a610fb" class="">Contacts PUT/PATCH request</h3><figure id="c30a3efd-927b-4186-b6e1-69c72aff5d18" class="image"><a href="Backend%20cda53316081f4c3386cea8873b8c1ed5/Untitled%205.png"><img style="width:1095px" src="Backend%20cda53316081f4c3386cea8873b8c1ed5/Untitled%205.png"/></a><figcaption> <a href="http://localhost:8000/api/contacts">http://localhost:8000/api/contacts</a> /&lt;userid&gt; erlaubt es einen PUT bzw. PATCH request für ein bestehendes Object zu machen</figcaption></figure><h3 id="5afd6b5f-2aee-44b2-ab9b-22fefd41ce30" class="">Signals</h3><p id="ab95797d-1c10-4ca3-8a13-b6e92b136caf" class="">In Django gibt es “signals”, welche als eine Art Listener dienen. </p><p id="e713f02e-a302-4275-ae84-b887ce8dbb98" class="">Beispiel:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="fd5705ba-5317-4410-a550-988a42aae651" class="code"><code class="language-Python">@reciever(post_save, sender=Comment)
+def create_notication(sender, instanc, created, **kwargs):</code></pre><ul id="45d2aff6-a8e1-40ad-91fb-7849083b0ace" class="bulleted-list"><li style="list-style-type:disc">Hier wird mit einer <code>reciever</code>-Annotation auf das Speichern eines Kommentars gehört. </li></ul><ul id="90e07b1b-d66b-48cd-8e11-7a27446ff1c8" class="bulleted-list"><li style="list-style-type:disc">mit <code>post_save</code> wird nach dem Speichern des Kommentars die <code>create_notification</code> -Funktion ausgeführt</li></ul><h1 id="662e1e57-f72c-41e7-acef-0335951e3252" class="">API View</h1><ul id="fe432dfb-6e1c-46e1-be05-7f51ced9183b" class="bulleted-list"><li style="list-style-type:disc">API-Views erlauben es, die Logik für die einzelnen Requests auf ein ViewSet selber zu definieren</li></ul><ul id="92802662-56ca-495d-8631-7a3e30bd6146" class="bulleted-list"><li style="list-style-type:disc">z.B. kann man damit die POST-Request-Funktion selber überschreiben und die Logik machen</li></ul><ul id="6225a511-2895-4cf2-a40b-830386bf488c" class="bulleted-list"><li style="list-style-type:disc">Sie unterscheiden sich also im Vergleich zu simplen ViewSets mit einem Router, indem dass sie viel tiefer modifizierbar sind und deswegen auch komplexer zu erstellen</li></ul><ul id="8a455b5f-156f-4445-bb18-86ae49af4ebe" class="bulleted-list"><li style="list-style-type:disc">Dies bedeutet auch, dass für ein einfaches ViewSet oft ein Router verwendet wird, welcher von sich aus Anfragen (POST GET PUT PATCH etc.) automatisch verarbeitet. Für ein API View hingegen definiert man die URLs selber, da man selber spezifiziert</li></ul><p id="78a69a96-e453-4977-9e33-dfc7301b7c09" class="">
+</p><p id="646051fe-b981-4b24-a856-7b8181c408ef" class=""><strong>Beispiel eines APIViews</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="d7778fbd-fccd-443b-9d61-5a202b31738b" class="code"><code class="language-Python">class RemoveUserFromFireplace(APIView):
+    &quot;&quot;&quot;
+    Add a user to a fireplace
+    &quot;&quot;&quot;
+
+    def post(self, request, pk, *args, **kwargs):
+        user = request.user
+        fireplace = get_object_or_404(Fireplace, pk=pk)
+
+        if user not in fireplace.users.all():
+            return Response({&#x27;detail&#x27;: &#x27;User was not found in Fireplace&#x27;}, status=status.HTTP_400_BAD_REQUEST)
+
+        fireplace.users.remove(user)
+        return Response({&#x27;detail&#x27;: &#x27;User removed from fireplace.&#x27;}, status=status.HTTP_201_CREATED)</code></pre><p id="6f17584f-d7c2-4645-b3b0-38ae63840f8e" class="">Das obige Beispiel zeigt, wie ein post request den user und die ID des request benutzt, um den aktiven User in einen Chatraum (fireplace) hinzuzufügen.</p><p id="66728a9c-7458-403a-91db-8d97bf0a5f8e" class="">
+</p><p id="b5709976-4da4-4701-9561-af9af8897475" class="">Wie oben erwähnt, wird die APIView mit einem Pfad in die <code>urlpatterns</code> eingebunden, nicht mit einem Router.  </p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="e01b6bb8-87ab-47d5-ab6f-0df5432a6d66" class="code"><code class="language-Python">urlpatterns = [
+    path(&#x27;fireplaces/&lt;int:pk&gt;/removeuser/&#x27;, RemoveUserFromFireplace.as_view(), name=&#x27;remove_user_from_fireplace&#x27;),
+]</code></pre><p id="acd91988-1054-4cb2-a677-a23dc867326d" class=""><strong>Weiters Beispiel</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="8505254d-456d-4c8e-b2ef-2e7ce74b7b35" class="code"><code class="language-Python">class BookCommentsAPIView(APIView):
+    &quot;&quot;&quot;
+    Get or add comments of a specific book
+    &quot;&quot;&quot;
+    permission_classes = [IsObjectOwner]
+
+    def get(self, request, pk, *args, **kwargs):
+        book = get_object_or_404(Book, pk=pk)
+        comments = Comment.objects.filter(book=book)
+        serializer = CommentSerializer(comments, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, pk, *args, **kwargs):
+        user = request.user
+        book = get_object_or_404(Book, pk=pk)
+        comment_serializer = CommentAPIViewSerializer(data=request.data)
+        print(book, book.id, user, user.id)
+
+        if comment_serializer.is_valid():
+            print(&quot;serializer is valid.&quot;)
+            comment_serializer.validated_data[&#x27;user_id&#x27;] = user.id
+            comment_serializer.validated_data[&#x27;book_id&#x27;] = book.id
+            comment_serializer.save()
+            return Response({&#x27;message&#x27;: &#x27;comment added successfully!&#x27;})
+
+        return Response({&#x27;message&#x27;: comment_serializer.errors})</code></pre><h1 id="9d731beb-48fc-4a23-b7aa-3bcdaf0be860" class="">Permissions</h1><p id="849ce83e-559a-4d77-964b-16ce970497b0" class="">Mit Permissions können Rechte auf gewisse Abfragen erstellt werden. Nebst den vordefinierten Permissions von Django, kann man auch seine eigenen erstellen:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="4cb66d35-0bbf-45ad-8e21-37f733aa6f10" class="code"><code class="language-Python">from rest_framework import permissions
+
+
+class IsObjectOwner(permissions.BasePermission):
+    &quot;&quot;&quot;
+    Custom permission to only allow owners of an object to access it.
+    &quot;&quot;&quot;
+
+    message = &quot;You must be the owner of this object.&quot;
+
+    def has_object_permission(self, request, view, obj):
+        &quot;&quot;&quot;
+        Check if the requesting user is the owner of the object.
+        &quot;&quot;&quot;
+        # Assuming the object has a &#x27;user&#x27; field representing the owner
+        return obj.user == request.user</code></pre><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="fcadbe78-6e0c-4a2b-9ec6-77f637acf21f" class="code"><code class="language-Python">class CommentViewSet(viewsets.ModelViewSet):
+    serializer_class = CommentSerializer
+    queryset = Comment.objects.all()
+		
+		# Bei DELETE, PUT und PATCH von Objekten muss der authentifizierte User der Ersteller
+		# des Kommentars sein.
+    def get_permissions(self):
+        permission_classes = [IsAuthenticated()]
+        if self.action in [&#x27;destroy&#x27;, &#x27;update&#x27;, &#x27;partial_update&#x27;]:
+            permission_classes.append(IsObjectOwner())
+        return permission_classes</code></pre><h3 id="0ad3c1e1-a1fd-46ee-86c8-07848bfb1362" class="">Create Superuser</h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="d8dcf83f-6e0c-4809-ace4-bb74f80793b9" class="code"><code class="language-Python">py manage.py createsuperuser</code></pre><p id="daedb93a-5423-4192-b991-2f010a222685" class="">Dieser kann nun z.B. in views verwendet werden. <code>[IsAdminUser]</code></p><h3 id="7b838040-187a-466e-85f5-5f8b78b6a0c5" class=""><strong>Query-Set einschränken</strong></h3><p id="f0a7931c-8cb2-4a67-92d4-4e94614d3947" class="">Im Beispiel oben werden nur Einschränkungen eingeführt, wenn ein einziges Objekt mit einer ID abgefragt wird. </p><p id="fe08f609-3ba7-4546-baaf-de4503a68379" class="">Wenn man jedoch z.B. die ganze Antwort des GET-Requests filtern will, kann man dies so erreichen: </p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="31582d87-be69-424e-a408-59a7d0d27103" class="code"><code class="language-Python">   class CommentViewSet(viewsets.ModelViewSet):
+    serializer_class = CommentSerializer
+    queryset = Comment.objects.all()
+    
+    def get_queryset(self):
+        return Comment.objects.filter(user=self.request.user)</code></pre><h1 id="40e3f3cc-fb92-467c-bad2-8227e9d575c8" class="">Logging</h1><p id="4a0de7d4-d280-47dd-85a9-3f5daa108467" class="">Mithilfe von Logging kann man Log-Nachrichten bei gewissen Ereignissen abspeichern lassen. Dies ist sehr hilfreich, wenn man das Verhalten des Backend analysieren will. Z.B. wenn ein unerwarteter Fehler passiert, kann man durch die Logs genau sehen, was zuvor passierte. </p><p id="2d2ee688-9e3b-4345-abcc-8a4dadd247d1" class="">
+</p><p id="0718a1d4-8e87-44b2-ae33-0d5a60702641" class="">Um diese Log-Nachrichten einzurichten, braucht man eine LOGGING-Konfiguration im <a href="http://settings.py">settings.py</a>-File:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="506eb452-eed9-4032-8624-d576b8ca425e" class="code"><code class="language-Python">LOGGING = {
+    &#x27;version&#x27;: 1,
+    &#x27;handlers&#x27;: {
+        &#x27;file&#x27;: {
+            &#x27;level&#x27;: &#x27;INFO&#x27;,
+            &#x27;class&#x27;: &#x27;logging.FileHandler&#x27;,
+            &#x27;filename&#x27;: &#x27;M295-lb2.log&#x27;,
+        },
+    },
+    &#x27;loggers&#x27;: {
+        &#x27;django&#x27;: {
+            &#x27;handlers&#x27;: [&#x27;file&#x27;],
+            &#x27;level&#x27;: &#x27;INFO&#x27;,
+            &#x27;propagate&#x27;: True,
+        },
+        &#x27;M295_logger&#x27;: {  # Add a logger for your application
+            &#x27;handlers&#x27;: [&#x27;file&#x27;],
+            &#x27;level&#x27;: &#x27;INFO&#x27;,
+            &#x27;propagate&#x27;: True,
+        },
+    },
+}</code></pre><p id="6b653c6e-ef32-43d1-9947-611346092a8a" class="">Hier werden zwei ‘loggers’ eingerichtet. Einmal ‘django’ und einmal ein custom ‘M295_logger’. Beide loggen nur ‘INFO’-Level Nachrichten und brauchen den ‘file’-Handler. Dieser sorgt dafür, dass die Log-Nachrichten in einem ‘M295-lb2.log’-File gespeichert werden. </p><p id="f3e0470e-c04f-43df-a813-a7e146b7e102" class="">Der ‘django’ logger ist mit Django vorinstalliert und lässt automatisch konfigurierte Log-Nachrichten zu Requests erscheinen. </p><p id="9e616615-11df-40b3-a20b-e4dbea6ae676" class="">Der ‘M295_logger’ wurde selber erstellt und muss von Hand verwendet werden:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="ef786701-66a0-44e8-bb74-e6f5efb39baa" class="code"><code class="language-Python">import logging
+
+logger = logging.getLogger(&#x27;M295_logger&#x27;)
+
+class UserSignupSerializer(ModelSerializer):
+		[...]
+    def create(self, validated_data):
+				[...]
+        logger.info(f&#x27;------------------------------------------\n&#x27;
+                    f&#x27;User created successfully:\n&#x27;
+                    f&#x27;{user.__str__()}&#x27;
+                    f&#x27;\n------------------------------------------&#x27;)
+        return user</code></pre><p id="ba51b6f2-19a0-4446-877f-378279d32882" class="">Hier wurde beim UserSignupSerializer der logger importiert. Nun kann mit <a href="http://logger.info">logger.info</a> eine Info geloggt werden. Dies passiert in diesem Fall jedes mal, wenn ein User erstellt wird.</p><p id="5164a43d-a321-480b-8204-f77747459213" class="">So sieht das .log-File schlussendlich aus:</p><figure id="fc7cb657-228e-479d-8e46-a9dae7aa3408" class="image" style="text-align:left"><a href="Backend%20cda53316081f4c3386cea8873b8c1ed5/Untitled%206.png"><img style="width:432px" src="Backend%20cda53316081f4c3386cea8873b8c1ed5/Untitled%206.png"/></a></figure><p id="355ce69d-47c1-4b56-a328-d20d8353497d" class="">
+</p><h1 id="55d93320-7a9c-4413-98dd-63faaa7ce760" class="">Cors</h1><p id="784bd108-4787-4b02-9aa5-c1d8f0ca8ac5" class="">CORS steht für &quot;Cross-Origin Resource Sharing&quot; und bezieht sich auf eine Sicherheitsrichtlinie in der Webentwicklung. Diese Richtlinie wird von Webbrowsern implementiert, um zu verhindern, dass JavaScript-Code auf einer Webseite auf Ressourcen von einem anderen Ursprung (einer anderen Domain, einem anderen Protokoll oder einem anderen Port) zugreift.Wenn eine Webseite Ressourcen wie Bilder, Skripte oder APIs von einem anderen Ursprung laden möchte, muss die Webseite CORS-Anfragen senden. Der Server, der diese Ressourcen bereitstellt, kann dann entscheiden, ob er Anfragen von bestimmten Ursprüngen zulässt oder ablehnt. Dies geschieht durch Hinzufügen spezieller HTTP-Header zu den Serverantworten.Durch die CORS-Richtlinie wird die Sicherheit des Webs verbessert, da sie verhindert, dass bösartiger Code auf einer Webseite auf vertrauliche Daten von anderen Webseiten zugreift. Entwickler müssen jedoch sicherstellen, dass ihre Server korrekt konfiguriert sind, um CORS-Anfragen zu behandeln, wenn ihre Webanwendungen Ressourcen von verschiedenen Ursprüngen laden müssen.---CORS-Policies werden im Backend konfiguriert. Ihr könnt folgendermassen vorgehen, wenn ihr Einstellungen in Django machen müsst.</p><ol type="1" id="61f15d37-a2a6-4b7f-af9f-590729c8568a" class="numbered-list" start="1"><li>install django-cors-headers</li></ol><ol type="1" id="d539d26f-8384-4b75-a8db-ef42e7b6e97e" class="numbered-list" start="2"><li>Füge den folgenden Code dem settings.py File hinzu</li></ol><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="64d8463f-0181-4394-9c10-81c00cb54170" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all"># CORS Configuration
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_WHITELIST = tuple(os.environ.get(&#x27;CORS_ORIGIN_WHITELIST&#x27;).split(&#x27;,&#x27;))
+</code></pre><p id="db2ddd80-d58a-4c92-b5dc-8289f25e17c6" class="">3. Füge deinem .env File den folgenden Eintrag hinzu</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="a7c4a503-5c52-4cb5-b02f-e9484428dee1" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">CORS_ORIGIN_WHITELIST=&#x27;https://my-cool.domain.ch,http://localhost:5173&#x27;
+</code></pre><p id="b54d1776-bc6c-40f6-8bd6-3e32d8d2cc22" class="">Natürlich müsst ihr hier die Domänen angeben, welche Zugriff erhalten sollen. Beispielsweise die Domäne der React-Applikation mit entsprechendem Port.</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
