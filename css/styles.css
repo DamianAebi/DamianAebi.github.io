@@ -56,6 +56,10 @@ html {
   margin: 0 auto;
 }
 
+
+
+/* Skill Cards */
+
 .skill-card {
   border-radius: 5%;
   background-color: #e6eef9;
@@ -74,6 +78,7 @@ html {
   width: 100%;
   height: 200px;
   border-radius: 5% 5% 0 0;
+  background-color: #f2f6ff;
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
@@ -83,6 +88,7 @@ html {
   height: 200px;
   width: 100%;
   padding: 10px;
+  border-top: 3px solid #f8f9ff;
 }
 
 .skill-card-text {
@@ -126,6 +132,23 @@ html {
   background-image: url("../img/logo_git.png");
 }
 
+
+
+/* Projects */
+
+.carousel-card {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.carousel-card-body {
+  height: 400px;
+}
+
+
+
+/* Footer */
+
 #kontakt {
   width: 100%;
   height: 200px;
@@ -133,18 +156,31 @@ html {
   padding-top: 50px;
 }
 
+
+
+/* Media Queries */
+
 @media (max-width: 768px) {
-  /* CSS rules for small screens and smaller */
+  /* CSS rules for md and smaller */
   .skill-card {
     width: 80%;
     margin: 0 auto;
   }
+
+  .carousel-card {
+    width: 80%;
+  }
+
 }
 
 @media (max-width: 576px) {
-  /* CSS rules for small screens and smaller */
+  /* CSS rules for sm and smaller */
   .skill-card {
     width: 100%;
     margin: 0 auto;
+  }
+
+  .carousel-card {
+    width: 100%;
   }
 }
